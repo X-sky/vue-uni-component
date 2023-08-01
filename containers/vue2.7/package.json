@@ -1,0 +1,21 @@
+{
+  "name": "vue-uni-containers-2.7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pre": "vue-demi-switch 2 vue2",
+    "dev": "pnpm pre && vite",
+    "build": "pnpm pre && vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-vue2": "^2.2.0"
+  },
+  "dependencies": {
+    "@vue-uni-ui/components": "workspace:^",
+    "vue": "^2.7.14"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "vue-uni-containers-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pre": "vue-demi-switch 3 vue3",
+    "dev": "pnpm pre && vite",
+    "build": "pnpm pre && vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3"
+  },
+  "dependencies": {
+    "@vue-uni-ui/components": "workspace:^",
+    "vue": "~3.2.47"
+  }
+}

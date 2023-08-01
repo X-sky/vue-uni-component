@@ -1,0 +1,24 @@
+{
+  "name": "vue-uni-containers-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pre": "vue-demi-switch 2",
+    "dev": "pnpm pre && vite",
+    "build": "pnpm pre && vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@vue/composition-api": "^1.7.1",
+    "unplugin-vue2-script-setup": "^0.11.4",
+    "vite-plugin-vue2": "^2.0.3",
+    "vue-template-compiler": "~2.6.14"
+  },
+  "dependencies": {
+    "@vue-uni-ui/components": "workspace:^",
+    "vue": "~2.6.14"
+  }
+}

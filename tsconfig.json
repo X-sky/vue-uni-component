@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "rootDirs": ["."],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"]
+    }
+  },
+  "include": ["packages/**/*.vue", "packages/**/*.ts", "containers/**/*.vue", "containers/**/*.ts"],
+  "exclude": ["node_modules", "**/*.md", "**/dist"]
+}
