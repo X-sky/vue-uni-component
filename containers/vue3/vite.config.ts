@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import vue3 from "@vitejs/plugin-vue";
-import { ROOT_DIR, VUE_ENTRY_3, VUE_DEMI_ENTRY_3 } from "../../utils/path";
+import { ROOT_DIR, VUE_ENTRY_3, VUE_DEMI_ENTRY_3, getBasicBuildOptions } from "../../utils";
 
+const destDirName = 'v3';
 export default defineConfig({
   plugins: [vue3()],
   server: {
@@ -14,4 +15,7 @@ export default defineConfig({
       "vue-demi": VUE_DEMI_ENTRY_3,
     },
   },
+  build: {
+    ...getBasicBuildOptions(destDirName)
+  }
 });
