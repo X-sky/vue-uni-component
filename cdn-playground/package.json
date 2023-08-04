@@ -1,0 +1,12 @@
+{
+  "name": "vite-cdn-playground",
+  "version": "0.0.1",
+  "description": "examples to use cdn of vue-uni-component",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "esno ./utils/prepare.ts && vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

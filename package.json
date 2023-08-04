@@ -7,6 +7,7 @@
     "dev:2": "pnpm -F ./containers/vue2 dev",
     "dev:27": "pnpm -F ./containers/vue2.7 dev",
     "dev:3": "pnpm -F ./containers/vue3 dev",
+    "dev:cdn": "pnpm -F ./cdn-playground dev",
     "build": "esno ./scripts/build.ts",
     "clean": "rimraf --glob ./**/node_modules ./**/dist dist node_modules"
   },

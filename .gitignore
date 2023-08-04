@@ -14,8 +14,7 @@ packages/contributing.md
 packages/core/README.md
 packages/public/badge-*
 packages/*/index.mjs
-playgrounds/*/pnpm-lock.yaml
-types
+cdn-playground/lib/vue
 coverage
 .eslintcache
 .vitepress/cache

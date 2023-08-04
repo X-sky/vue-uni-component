@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cdn test page</title>
+  </head>
+  <body>
+    <!-- ######component area -->
+    <div id="app">
+      <uni-template />
+    </div>
+
+    <!-- ######vue2.6 -->
+    <script src="./lib/vue/2.6/vue@2.6.14.js"></script>
+    <script src="./lib/vue/2.6/composition-api@1.7.1.prod.js"></script>
+    <script src="./lib/dist/index_v2.js"></script>
+    <script>
+      // --------------vue2
+      Vue.use(__VUE_UNI_COMP__.default);
+      new Vue({
+        el: "#app",
+      });
+    </script>
+
+    <!-- #####vue2.7 -->
+    <!-- <script src="./lib/vue/2.7/vue@2.7.14.js"></script>
+    <script src="./lib/index_v2.7.js"></script>
+    <script>
+      Vue.use(__VUE_UNI_COMP__.default);
+      new Vue({
+        el: "#app",
+      });
+    </script> -->
+
+    <!-- #####vue3 -->
+    <!-- <script src="./lib/vue/3/vue@3.2.47.global.js"></script>
+    <script src="./lib/dist/index_v3.js"></script>
+    <script>
+      const App = {};
+      const app = Vue.createApp(App);
+      app.use(__VUE_UNI_COMP__.default);
+      app.mount("#app");
+    </script> -->
+  </body>
+</html>

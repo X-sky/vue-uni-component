@@ -1,13 +1,17 @@
-import consola from "consola";
 import { copySync, removeSync } from "fs-extra";
-import { OUTPUT_META, PUBLISH_ROOT, getContainerEntries } from "../utils";
 import { execSync } from "node:child_process";
+import {
+  OUTPUT_META,
+  PUBLISH_ROOT,
+  getContainerEntries,
+  buildLog,
+} from "../utils";
 
 async function main() {
   try {
-    consola.info("prepare build steps...");
+    buildLog.start("prepare build steps...");
     // 构建前预编译
-    consola.info("\nbuild packages...");
+    buildLog.start("\nbuild packages...");
     // remove cache
     removeSync(PUBLISH_ROOT);
     const containers = await getContainerEntries();
@@ -16,12 +20,12 @@ async function main() {
         stdio: "inherit",
       });
     });
-    consola.info("\ncopy meta info...");
+    buildLog.start("\ncopy meta info...");
     copySync(OUTPUT_META, PUBLISH_ROOT);
     // 构建后补充产物
-    consola.info("appending build products...");
+    buildLog.start("appending build products...");
   } catch (err) {
-    consola.error(err);
+    buildLog.error(err);
   }
 }
 

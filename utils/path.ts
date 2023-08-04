@@ -5,10 +5,14 @@ export const ROOT_DIR = resolve(__dirname, "..");
 
 // <----------------- source code path ----------------->
 export const PACKAGES_ROOT = resolve(ROOT_DIR, "packages");
-export const COMPONENTS_ENTRY = resolve(PACKAGES_ROOT, "components", "index.ts");
+export const COMPONENTS_ENTRY = resolve(
+  PACKAGES_ROOT,
+  "components",
+  "index.ts"
+);
 
-export const META_ROOT = resolve(ROOT_DIR, 'meta');
-export const OUTPUT_META = resolve(META_ROOT, 'lib');
+export const META_ROOT = resolve(ROOT_DIR, "meta");
+export const OUTPUT_META = resolve(META_ROOT, "lib");
 
 // <----------------- output path ----------------->
 export const PUBLISH_ROOT = resolve(ROOT_DIR, "dist");
@@ -44,3 +48,7 @@ export async function getContainerEntries() {
   });
   return pathList.map((pathStr) => pathStr.replace(matchPattern, ""));
 }
+
+export const CDN_CONTAINER_PATH = resolve(ROOT_DIR, "cdn-playground");
+export const CDN_CONTAINER_DIST_PATH = resolve(CDN_CONTAINER_PATH, "lib", "dist");
+export const getCdnFileDistPath = (fileName: string)=>resolve(CDN_CONTAINER_DIST_PATH, fileName);
