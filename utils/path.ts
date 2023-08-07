@@ -1,5 +1,6 @@
 import { resolve } from "node:path";
 import fg from "fast-glob";
+import { VersionType, getComponentLibName } from "../meta/constants";
 
 export const ROOT_DIR = resolve(__dirname, "..");
 
@@ -15,8 +16,10 @@ export const META_ROOT = resolve(ROOT_DIR, "meta");
 export const OUTPUT_META = resolve(META_ROOT, "lib");
 
 // <----------------- output path ----------------->
-export const PUBLISH_ROOT = resolve(ROOT_DIR, "dist");
-export const OUTPUT_DIR = resolve(PUBLISH_ROOT, "lib");
+export const OUTPUT_ROOT = resolve(ROOT_DIR, "dist");
+/** component lib output dir */
+export const getComponentLibOutputDir = (version: VersionType) =>
+  resolve(OUTPUT_ROOT, getComponentLibName(version));
 
 // <----------------- other ----------------->
 export const VUE_DEMI_LIB = resolve(ROOT_DIR, "node_modules/vue-demi/lib");
@@ -40,7 +43,7 @@ export const VUE_ENTRY_3 = resolve(
   "node_modules/vue3/dist/vue.runtime.esm-browser.js"
 );
 
-/** 获取容器路径 */
+/** get dev & build container path */
 export async function getContainerEntries() {
   const matchPattern = "./containers/";
   const pathList = await fg(`${matchPattern}*`, {
@@ -50,5 +53,10 @@ export async function getContainerEntries() {
 }
 
 export const CDN_CONTAINER_PATH = resolve(ROOT_DIR, "cdn-playground");
-export const CDN_CONTAINER_DIST_PATH = resolve(CDN_CONTAINER_PATH, "lib", "dist");
-export const getCdnFileDistPath = (fileName: string)=>resolve(CDN_CONTAINER_DIST_PATH, fileName);
+export const CDN_CONTAINER_DIST_PATH = resolve(
+  CDN_CONTAINER_PATH,
+  "lib",
+  "dist"
+);
+export const getCdnFileDistPath = (fileName: string) =>
+  resolve(CDN_CONTAINER_DIST_PATH, fileName);

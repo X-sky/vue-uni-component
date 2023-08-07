@@ -52,7 +52,9 @@ importers:
         specifier: npm:vue@3.2.47
         version: registry.npmmirror.com/vue@3.2.47
 
-  containers/vue2:
+  cdn-playground: {}
+
+  containers/v2:
     dependencies:
       '@vue-uni-ui/components':
         specifier: workspace:^
@@ -74,7 +76,7 @@ importers:
         specifier: ~2.6.14
         version: registry.npmmirror.com/vue-template-compiler@2.6.14
 
-  containers/vue2.7:
+  containers/v2.7:
     dependencies:
       '@vue-uni-ui/components':
         specifier: workspace:^
@@ -87,7 +89,7 @@ importers:
         specifier: ^2.2.0
         version: registry.npmmirror.com/@vitejs/plugin-vue2@2.2.0(vite@4.4.7)(vue@2.7.14)
 
-  containers/vue3:
+  containers/v3:
     dependencies:
       '@vue-uni-ui/components':
         specifier: workspace:^

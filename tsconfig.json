@@ -8,6 +8,14 @@
       "~/*": ["./*"]
     }
   },
-  "include": ["packages/**/*.vue", "packages/**/*.ts", "containers/**/*.vue", "containers/**/*.ts"],
+  "include": [
+    "packages/**/*.vue",
+    "packages/**/*.ts",
+    "containers/**/*.vue",
+    "containers/**/*.ts",
+    "meta",
+    "scripts",
+    "utils"
+  ],
   "exclude": ["node_modules", "**/*.md", "**/dist"]
 }

@@ -12,7 +12,7 @@ export async function prepareCdnDevEnv() {
   try {
     buildLog.start("prepare cdn dev env");
     buildLog.info("copy latest iife files to cdn-playground");
-    const iifeFiles = await fg("dist/lib/**/*.iife.js", {
+    const iifeFiles = await fg("dist/**/*.iife.js", {
       onlyFiles: true,
       cwd: ROOT_DIR,
       absolute: true,

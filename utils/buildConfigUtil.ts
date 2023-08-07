@@ -2,12 +2,8 @@ import { readFileSync } from "fs-extra";
 import type { Plugin } from "rollup";
 import type { LibraryFormats, BuildOptions } from "vite";
 
-import { COMPONENTS_ENTRY, OUTPUT_DIR, VUE_DEMI_IIFE } from "./path";
-import { resolve } from "node:path";
-import { IIFE_NAME } from "../meta/constants";
-
-export type Version = "2" | "2.7" | "3";
-export type VersionType = `v${Version}`;
+import { COMPONENTS_ENTRY, VUE_DEMI_IIFE, getComponentLibOutputDir } from "./path";
+import { IIFE_NAME, VersionType } from "../meta/constants";
 
 /** 动态插入vue-demi运行时 */
 function dynamicInjectVueDemiPlugin(): Plugin {
@@ -26,7 +22,7 @@ function dynamicInjectVueDemiPlugin(): Plugin {
 }
 
 export function getBasicBuildOptions(version: VersionType): BuildOptions {
-  const outDir = resolve(OUTPUT_DIR, version);
+  const outDir = getComponentLibOutputDir(version);
   return {
     outDir,
     emptyOutDir: true,

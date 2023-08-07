@@ -14,10 +14,6 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "noUnusedLocals": true,
-    "noImplicitAny": true,
-    "paths": {
-      "~/*": ["./*"]
-    }
-  },
-  "include": ["meta", "scripts", "utils", "vite.config.ts"]
+    "noImplicitAny": true
+  }
 }
