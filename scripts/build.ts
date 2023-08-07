@@ -1,8 +1,19 @@
 import { removeSync } from "fs-extra";
+import fg from 'fast-glob';
 import { execSync } from "node:child_process";
-import { getContainerEntries, buildLog, OUTPUT_ROOT } from "../utils";
+import { buildLog, OUTPUT_ROOT, ROOT_DIR } from "../utils";
 import { setPackageMeta } from "./packageMeta";
 import { isValidVersionType } from "~/meta/constants";
+
+/** get dev & build container path */
+async function getContainerEntries() {
+  const matchPattern = "./containers/";
+  const pathList = await fg(`${matchPattern}*`, {
+    cwd: ROOT_DIR,
+    onlyDirectories: true,
+  });
+  return pathList.map((pathStr) => pathStr.replace(matchPattern, ""));
+}
 
 async function main() {
   try {

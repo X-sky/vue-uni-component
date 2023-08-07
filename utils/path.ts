@@ -1,5 +1,4 @@
 import { resolve } from "node:path";
-import fg from "fast-glob";
 import { VersionType, getComponentLibName } from "../meta/constants";
 
 export const ROOT_DIR = resolve(__dirname, "..");
@@ -42,15 +41,6 @@ export const VUE_ENTRY_3 = resolve(
   ROOT_DIR,
   "node_modules/vue3/dist/vue.runtime.esm-browser.js"
 );
-
-/** get dev & build container path */
-export async function getContainerEntries() {
-  const matchPattern = "./containers/";
-  const pathList = await fg(`${matchPattern}*`, {
-    onlyDirectories: true,
-  });
-  return pathList.map((pathStr) => pathStr.replace(matchPattern, ""));
-}
 
 export const CDN_CONTAINER_PATH = resolve(ROOT_DIR, "cdn-playground");
 export const CDN_CONTAINER_DIST_PATH = resolve(

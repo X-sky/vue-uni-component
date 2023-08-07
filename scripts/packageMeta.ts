@@ -1,8 +1,9 @@
-import { resolve } from "node:path";
+import { resolve, basename } from "node:path";
+import { copyFile, writeFile } from "fs-extra";
+import fg from "fast-glob";
 import { VersionType, getComponentLibName } from "../meta/constants";
-import basePackageInfo from "../meta/base-package.json";
-import { writeFile } from "fs-extra";
-import { getComponentLibOutputDir } from "../utils";
+import basePackageInfo from "~/meta/ui-common/base-package.json";
+import { getComponentLibOutputDir, ROOT_DIR } from "../utils";
 
 function setPackageJson(version: VersionType) {
   const packageName = getComponentLibName(version);
@@ -18,6 +19,21 @@ function setPackageJson(version: VersionType) {
   writeFile(targetPackageJsonPath, JSON.stringify(basePackageInfo), "utf8");
 }
 
+async function copyFiles(version: VersionType) {
+  const sourceFiles = await fg("./meta/ui-common/copy/**/*", {
+    cwd: ROOT_DIR,
+    onlyFiles: true,
+    absolute: true,
+  });
+  const targetLibDir = getComponentLibOutputDir(version);
+  sourceFiles.forEach((sourceFile) => {
+    const fileName = basename(sourceFile);
+    const targetFilePath = resolve(targetLibDir, fileName);
+    copyFile(sourceFile, targetFilePath);
+  });
+}
+
 export function setPackageMeta(version: VersionType) {
   setPackageJson(version);
+  copyFiles(version);
 }
