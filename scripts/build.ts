@@ -1,8 +1,9 @@
 import { removeSync } from "fs-extra";
-import fg from 'fast-glob';
+import fg from "fast-glob";
 import { execSync } from "node:child_process";
 import { buildLog, OUTPUT_ROOT, ROOT_DIR } from "../utils";
 import { setPackageMeta } from "./packageMeta";
+import { setPackageTypes } from "./types";
 import { isValidVersionType } from "~/meta/constants";
 
 /** get dev & build container path */
@@ -37,6 +38,7 @@ async function main() {
     containers.forEach((dir) => {
       if (isValidVersionType(dir)) {
         setPackageMeta(dir);
+        setPackageTypes(dir);
       }
     });
     buildLog.start("add additional build products...");
