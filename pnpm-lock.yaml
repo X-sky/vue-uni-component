@@ -117,8 +117,6 @@ importers:
         specifier: workspace:^
         version: link:../utils
 
-  packages/hooks: {}
-
   packages/utils: {}
 
 packages:

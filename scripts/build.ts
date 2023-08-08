@@ -31,14 +31,7 @@ async function main() {
         stdio: "inherit",
       });
     });
-    // build other libs
-    buildLog.start("Rollup other packages...");
-    execSync(`pnpm run build:rollup`, {
-      stdio: "inherit",
-    });
-
-    buildLog.start("Copy meta info...");
-    // set meta for npm packages
+    buildLog.info("Copy component lib meta...");
     // do something
     containers.forEach((dir) => {
       if (isValidVersionType(dir)) {
@@ -46,6 +39,12 @@ async function main() {
         setPackageTypes(dir);
       }
     });
+    // build other libs
+    buildLog.start("Rollup other packages...");
+    execSync(`pnpm run build:rollup`, {
+      stdio: "inherit",
+    });
+
     buildLog.success("All build tasks done");
     // buildLog.start("add additional build products...");
     // # no works for now

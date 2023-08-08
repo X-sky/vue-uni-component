@@ -5,9 +5,9 @@
   "private": true,
   "packageManager": "pnpm@8.6.7",
   "scripts": {
-    "dev:2": "pnpm -F ./containers/vue2 dev",
-    "dev:27": "pnpm -F ./containers/vue2.7 dev",
-    "dev:3": "pnpm -F ./containers/vue3 dev",
+    "dev:2": "pnpm -F ./containers/v2 dev",
+    "dev:27": "pnpm -F ./containers/v2.7 dev",
+    "dev:3": "pnpm -F ./containers/v3 dev",
     "dev:cdn": "pnpm -F ./cdn-playground dev",
     "build": "esno ./scripts/build.ts",
     "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c",
