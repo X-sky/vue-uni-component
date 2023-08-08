@@ -12,6 +12,7 @@ function setPackageJson(version: VersionType) {
     "v",
     ""
   )}`;
+  // TODO: sync dependencies
   const targetPackageJsonPath = resolve(
     getComponentLibOutputDir(version),
     "package.json"

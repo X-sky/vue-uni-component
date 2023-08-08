@@ -2,11 +2,20 @@ import { readFileSync } from "fs-extra";
 import type { Plugin } from "rollup";
 import type { LibraryFormats, BuildOptions } from "vite";
 
-import { COMPONENTS_ENTRY, VUE_DEMI_IIFE, getComponentLibOutputDir } from "./path";
-import { IIFE_NAME, VersionType } from "../meta/constants";
+import {
+  COMPONENTS_ENTRY,
+  VUE_DEMI_IIFE,
+  getComponentLibOutputDir,
+} from "./path";
+import {
+  EXTERNAL_LIBS,
+  IIFE_GLOBALS_CONFIG,
+  UI_LIB_IIFE_NAME,
+  VersionType,
+} from "../meta/constants";
 
 /** 动态插入vue-demi运行时 */
-function dynamicInjectVueDemiPlugin(): Plugin {
+export function dynamicInjectVueDemiPlugin(): Plugin {
   const vueDemiRuntimeCode = readFileSync(VUE_DEMI_IIFE, "utf-8");
   const injectFormatList: LibraryFormats[] = ["iife", "umd"];
   return {
@@ -29,21 +38,14 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
     lib: {
       entry: COMPONENTS_ENTRY,
       formats: ["es", "cjs", "iife"],
-      name: IIFE_NAME,
+      name: UI_LIB_IIFE_NAME,
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [
-        "vue-demi",
-        "vue",
-        "@vue/composition-api/dist/vue-composition-api.mjs",
-      ],
+      external: EXTERNAL_LIBS,
       output: {
         globals: {
-          vue: "Vue",
-          "vue-demi": "VueDemi",
-          "@vue/composition-api/dist/vue-composition-api.mjs":
-            "VueCompositionAPI",
+          ...IIFE_GLOBALS_CONFIG,
         },
         plugins: [dynamicInjectVueDemiPlugin()],
       },

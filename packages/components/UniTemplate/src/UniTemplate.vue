@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { computed, ref, version } from 'vue-demi';
+import { computed, version } from "vue-demi";
+import { useCalc } from "@vue-uni-component/utils";
 
 const props = withDefaults(
   defineProps<{
@@ -9,21 +10,15 @@ const props = withDefaults(
     msg: "Hello",
   }
 );
-const num = ref(0);
-const increase = ()=>{
-  num.value++;
-}
-const decrease = ()=>{
-  num.value--;
-}
+const { num, increase, decrease } = useCalc();
 
-const title = computed(()=>`${props.msg}, Vue@${version}`);
+const title = computed(() => `${props.msg}, Vue@${version}`);
 </script>
 <template>
   <div>
     <h1>
       {{ title }}
-    </h1> 
+    </h1>
     <div>
       <button @click="increase">+</button>
       <span>{{ num }}</span>

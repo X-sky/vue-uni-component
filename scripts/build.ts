@@ -18,11 +18,11 @@ async function getContainerEntries() {
 
 async function main() {
   try {
-    buildLog.start("prepare build steps...\n");
+    buildLog.start("Prepare build steps...\n");
     // prepare before build
     // # no works for now
 
-    buildLog.start("build packages...");
+    buildLog.start("Build component packages...");
     // remove cache
     removeSync(OUTPUT_ROOT);
     const containers = await getContainerEntries();
@@ -31,8 +31,13 @@ async function main() {
         stdio: "inherit",
       });
     });
+    // build other libs
+    buildLog.start("Rollup other packages...");
+    execSync(`pnpm run build:rollup`, {
+      stdio: "inherit",
+    });
 
-    buildLog.start("copy meta info...");
+    buildLog.start("Copy meta info...");
     // set meta for npm packages
     // do something
     containers.forEach((dir) => {
@@ -41,7 +46,8 @@ async function main() {
         setPackageTypes(dir);
       }
     });
-    buildLog.start("add additional build products...");
+    buildLog.success("All build tasks done");
+    // buildLog.start("add additional build products...");
     // # no works for now
   } catch (err) {
     buildLog.error(err);

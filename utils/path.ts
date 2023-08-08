@@ -1,15 +1,12 @@
 import { resolve } from "node:path";
-import { VersionType, getComponentLibName } from "../meta/constants";
+import { LibSuffix, getComponentLibName } from "../meta/constants";
 
 export const ROOT_DIR = resolve(__dirname, "..");
 
 // <----------------- source code path ----------------->
 export const PACKAGES_ROOT = resolve(ROOT_DIR, "packages");
-export const COMPONENTS_ENTRY = resolve(
-  PACKAGES_ROOT,
-  "components",
-  "index.ts"
-);
+export const COMPONENTS_ENTRY = resolve(PACKAGES_ROOT, "components/index.ts");
+export const UTILS_ENTRY = resolve(PACKAGES_ROOT, "utils/index.ts");
 
 export const META_ROOT = resolve(ROOT_DIR, "meta");
 export const OUTPUT_META = resolve(META_ROOT, "lib");
@@ -17,8 +14,8 @@ export const OUTPUT_META = resolve(META_ROOT, "lib");
 // <----------------- output path ----------------->
 export const OUTPUT_ROOT = resolve(ROOT_DIR, "dist");
 /** component lib output dir */
-export const getComponentLibOutputDir = (version: VersionType) =>
-  resolve(OUTPUT_ROOT, getComponentLibName(version));
+export const getComponentLibOutputDir = (libName: LibSuffix) =>
+  resolve(OUTPUT_ROOT, getComponentLibName(libName));
 
 // <----------------- other ----------------->
 export const VUE_DEMI_LIB = resolve(ROOT_DIR, "node_modules/vue-demi/lib");
