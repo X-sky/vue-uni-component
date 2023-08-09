@@ -1,8 +1,8 @@
 {
   "name": "vue-uni-component",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1-beta.0",
   "private": true,
+  "description": "",
   "packageManager": "pnpm@8.6.7",
   "scripts": {
     "dev:2": "pnpm -F ./containers/v2 dev",
@@ -11,6 +11,7 @@
     "dev:cdn": "pnpm -F ./cdn-playground dev",
     "build": "esno ./scripts/build.ts",
     "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c",
+    "release": "bumpp",
     "clean": "rimraf --glob ./**/node_modules ./**/dist dist node_modules"
   },
   "keywords": [],
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^20.4.5",
+    "bumpp": "^9.1.1",
     "consola": "^3.2.3",
     "cross-env": "^7.0.3",
     "esbuild-register": "^3.4.2",

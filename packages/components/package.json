@@ -1,8 +1,8 @@
 {
   "name": "@vue-uni-ui/components",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1-beta.0",
   "private": true,
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@vue-uni-component/utils": "workspace:^"
+    "@vue-uni-ui/utils": "workspace:^"
   }
 }

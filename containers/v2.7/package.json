@@ -1,6 +1,7 @@
 {
   "name": "vue-uni-containers-2.7",
-  "version": "1.0.0",
+  "version": "0.0.1-beta.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {

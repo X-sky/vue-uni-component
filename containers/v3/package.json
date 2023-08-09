@@ -1,7 +1,8 @@
 {
   "name": "vue-uni-containers-3",
-  "version": "1.0.0",
+  "version": "0.0.1-beta.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "pre": "vue-demi-switch 3 vue3",
