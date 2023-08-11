@@ -12,5 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "@vue-uni-ui/utils": "workspace:^"
-  }
+  },
+  "devDependencies": {}
 }

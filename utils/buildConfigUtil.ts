@@ -39,7 +39,13 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
       entry: COMPONENTS_ENTRY,
       formats: ["es", "cjs", "iife"],
       name: UI_LIB_IIFE_NAME,
-      fileName: (format) => `index.${format}.js`,
+      fileName: (format) => {
+        if (format === "es") {
+          return "index.mjs";
+        } else {
+          return `index.${format}.js`;
+        }
+      },
     },
     rollupOptions: {
       external: EXTERNAL_LIBS,

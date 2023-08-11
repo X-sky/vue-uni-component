@@ -9,7 +9,7 @@ export const COMPONENTS_ENTRY = resolve(PACKAGES_ROOT, "components/index.ts");
 export const UTILS_ENTRY = resolve(PACKAGES_ROOT, "utils/index.ts");
 
 export const META_ROOT = resolve(ROOT_DIR, "meta");
-export const OUTPUT_META = resolve(META_ROOT, "lib");
+export const UI_COMMON_META = resolve(META_ROOT, 'ui-common');
 
 // <----------------- output path ----------------->
 export const OUTPUT_ROOT = resolve(ROOT_DIR, "dist");

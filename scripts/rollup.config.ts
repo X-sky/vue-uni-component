@@ -1,5 +1,11 @@
-import { copyFile, existsSync, mkdirSync } from "fs-extra";
-import { dirname, resolve } from "node:path";
+import {
+  copyFile,
+  existsSync,
+  mkdirSync,
+  readJsonSync,
+  writeJSON,
+} from "fs-extra";
+import { dirname, resolve, extname } from "node:path";
 import type { RollupOptions, Plugin } from "rollup";
 import type { Options as ESBuildOptions } from "rollup-plugin-esbuild";
 import esbuild from "rollup-plugin-esbuild";
@@ -12,6 +18,7 @@ import {
   buildLog,
   dynamicInjectVueDemiPlugin,
   getComponentLibOutputDir,
+  ROOT_DIR,
   UTILS_ENTRY,
 } from "~/utils";
 
@@ -37,7 +44,20 @@ function copyMetaPlugin(): Plugin {
       metaFileNames.forEach((fileName) => {
         const sourceFilePath = resolve(dirname(UTILS_ENTRY), fileName);
         const targetFilePath = resolve(outDir, fileName);
-        copyFile(sourceFilePath, targetFilePath);
+        if (extname(fileName).includes("json")) {
+          // update dependencies with root
+          const jsonContent = readJsonSync(sourceFilePath);
+          const rootJson = readJsonSync(resolve(ROOT_DIR, "package.json"));
+          jsonContent.dependencies = {
+            ...(jsonContent.dependencies || {}),
+            ...(rootJson.dependencies || {}),
+          };
+          writeJSON(targetFilePath, jsonContent, {
+            spaces: 2,
+          });
+        } else {
+          copyFile(sourceFilePath, targetFilePath);
+        }
       });
     },
   };

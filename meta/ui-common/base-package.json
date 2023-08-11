@@ -20,14 +20,5 @@
   },
   "dependencies": {
     "vue-demi": "^0.14.5"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^3.0.0-0 || ^2.6.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
   }
 }
