@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, version } from "vue-demi";
-import { useCalc } from "@vue-uni-component/utils";
+import { useCalc } from "@vue-uni-ui/utils";
 
 const props = withDefaults(
   defineProps<{
