@@ -1,6 +1,0 @@
-{
-  "compilerOptions": {
-    "types": []
-  },
-  "references": ["../../tsconfig.json"]
-}

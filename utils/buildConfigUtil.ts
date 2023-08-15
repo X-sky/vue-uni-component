@@ -6,6 +6,7 @@ import {
   COMPONENTS_ENTRY,
   VUE_DEMI_IIFE,
   getComponentLibOutputDir,
+  VUE_LIB_MAP
 } from "./path";
 import {
   EXTERNAL_LIBS,
@@ -13,6 +14,8 @@ import {
   UI_LIB_IIFE_NAME,
   VersionType,
 } from "../meta/constants";
+import { UserConfig } from "vite";
+import { getCommonAlias } from "./alias";
 
 /** 动态插入vue-demi运行时 */
 export function dynamicInjectVueDemiPlugin(): Plugin {
@@ -56,5 +59,22 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
         plugins: [dynamicInjectVueDemiPlugin()],
       },
     },
+  };
+}
+
+export function getBasicContainerViteConfig(version: VersionType): UserConfig {
+  return {
+    server: {
+      port: 2143
+    },
+    resolve: {
+      alias: {
+        ...getCommonAlias(),
+        ...VUE_LIB_MAP[version]
+      },
+    },
+    build: {
+      ...getBasicBuildOptions(version)
+    }
   };
 }
