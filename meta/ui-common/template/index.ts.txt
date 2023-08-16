@@ -1,0 +1,6 @@
+import { withInstall } from "../utils/install";
+import ##NAME##Sfc from "./src/##NAME##.vue";
+
+export const ##NAME## = withInstall('##NAME##', ##NAME##Sfc);
+
+export default ##NAME##;

@@ -5,11 +5,13 @@ export const ROOT_DIR = resolve(__dirname, "..");
 
 // <----------------- source code path ----------------->
 export const PACKAGES_ROOT = resolve(ROOT_DIR, "packages");
-export const COMPONENTS_ENTRY = resolve(PACKAGES_ROOT, "components/index.ts");
+export const COMPONENTS_ROOT = resolve(PACKAGES_ROOT, 'components');
+export const COMPONENTS_ENTRY = resolve(COMPONENTS_ROOT, "index.ts");
 export const UTILS_ENTRY = resolve(PACKAGES_ROOT, "utils/index.ts");
 
 export const META_ROOT = resolve(ROOT_DIR, "meta");
 export const UI_COMMON_META = resolve(META_ROOT, 'ui-common');
+export const UI_TEMPLATE_META = resolve(UI_COMMON_META, 'template');
 
 // <----------------- output path ----------------->
 export const OUTPUT_ROOT = resolve(ROOT_DIR, "dist");
