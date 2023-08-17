@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { computed, version } from "vue-demi";
-import { useCalc } from "@vue-uni-ui/utils";
+import { useCalc, useUniTheme } from "@vue-uni-ui/utils";
+
+useUniTheme();
 
 const props = withDefaults(
   defineProps<{
@@ -16,7 +18,7 @@ const title = computed(() => `${props.msg}, Vue@${version}`);
 </script>
 <template>
   <div>
-    <h1>
+    <h1 class="uni-header">
       {{ title }}
     </h1>
     <div>
@@ -26,3 +28,8 @@ const title = computed(() => `${props.msg}, Vue@${version}`);
     </div>
   </div>
 </template>
+<style scoped>
+  .uni-header {
+    color: var(--uu-color-warn)
+  }
+</style>

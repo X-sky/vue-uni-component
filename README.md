@@ -1,2 +1,2 @@
 # vue-uni-component
-write once, use in every version
+A Universal component lib for Vue 2 & 3!
