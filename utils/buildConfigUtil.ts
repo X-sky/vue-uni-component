@@ -1,8 +1,7 @@
 import { readFileSync } from "node:fs";
-import type { Plugin } from "rollup";
-import type { LibraryFormats, BuildOptions } from "vite";
+import type { LibraryFormats, BuildOptions, UserConfig } from "vite";
+import type { Plugin as RollupPlugin } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-
 import {
   COMPONENTS_ENTRY,
   VUE_DEMI_IIFE,
@@ -15,11 +14,10 @@ import {
   UI_LIB_IIFE_NAME,
   VersionType,
 } from "../meta/constants";
-import { UserConfig } from "vite";
 import { getCommonAlias } from "./alias";
 
 /** rollup 公共插件配置 */
-export function getPublicRollupPlugins(): Plugin[] {
+export function getPublicRollupPlugins(): RollupPlugin[] {
   return [
     nodeResolve({
       resolveOnly: ["lodash-es"],
@@ -27,7 +25,7 @@ export function getPublicRollupPlugins(): Plugin[] {
   ];
 }
 /** 动态插入vue-demi运行时 */
-export function dynamicInjectVueDemiPlugin(): Plugin {
+export function dynamicInjectVueDemiPlugin(): RollupPlugin {
   const vueDemiRuntimeCode = readFileSync(VUE_DEMI_IIFE, "utf-8");
   const injectFormatList: LibraryFormats[] = ["iife", "umd"];
   return {
@@ -65,10 +63,7 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
         globals: {
           ...IIFE_GLOBALS_CONFIG,
         },
-        plugins: [
-          dynamicInjectVueDemiPlugin(),
-          ...getPublicRollupPlugins()
-        ],
+        plugins: [dynamicInjectVueDemiPlugin(), ...getPublicRollupPlugins()],
       },
     },
   };

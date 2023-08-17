@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cdn test page</title>
-    <link rel="stylesheet" href="./lib/dist/style.css">
+    <link rel="stylesheet" href="./lib/dist/style.css" />
   </head>
   <body>
     <!-- ######component area -->
@@ -23,6 +23,24 @@
       new Vue({
         el: "#app",
       });
+
+      const getAutoUpdateObj = () => {
+        let _num = 0;
+        const obj = {};
+        Object.defineProperty(obj, num, {
+          get() {
+            return _num;
+          },
+          set(newNum) {
+            _num = newNum;
+            // 做些什么：比如发送请求
+          },
+        });
+        return obj;
+      };
+      // 使用的时候
+      const obj = getAutoUpdateObj();
+      obj.num = 2;
     </script>
 
     <!-- #####vue2.7 -->
