@@ -4,6 +4,7 @@
   "private": true,
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "pre": "vue-demi-switch 2 vue2",
     "dev": "pnpm pre && vite",

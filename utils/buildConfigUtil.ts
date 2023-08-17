@@ -1,4 +1,4 @@
-import { readFileSync } from "fs-extra";
+import { readFileSync } from "node:fs";
 import type { Plugin } from "rollup";
 import type { LibraryFormats, BuildOptions } from "vite";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
