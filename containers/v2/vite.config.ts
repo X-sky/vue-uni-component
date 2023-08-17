@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import { createVuePlugin as vue2 } from "vite-plugin-vue2";
 import setupScriptPlugin from "unplugin-vue2-script-setup/vite";
-import { merge } from "lodash";
+import { merge } from "lodash-es";
 import { getBasicContainerViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
