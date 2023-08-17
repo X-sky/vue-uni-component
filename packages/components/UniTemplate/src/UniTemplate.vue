@@ -17,8 +17,8 @@ const { num, increase, decrease } = useCalc();
 const title = computed(() => `${props.msg}, Vue@${version}`);
 </script>
 <template>
-  <div>
-    <h1 class="uni-header">
+  <div class="uu-template">
+    <h1 class="uu-template__header">
       {{ title }}
     </h1>
     <div>
@@ -28,8 +28,10 @@ const title = computed(() => `${props.msg}, Vue@${version}`);
     </div>
   </div>
 </template>
-<style scoped>
-  .uni-header {
-    color: var(--uu-color-warn)
+<style lang="scss">
+.uu-template {
+  &__header {
+    color: var(--uu-color-warn);
   }
+}
 </style>
