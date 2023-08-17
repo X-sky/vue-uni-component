@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import vue27 from "@vitejs/plugin-vue2";
-import { merge } from "lodash-es";
+import { merge } from "lodash";
 import { getBasicContainerViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
