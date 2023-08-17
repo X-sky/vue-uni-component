@@ -1,12 +1,13 @@
 import { readFileSync } from "fs-extra";
 import type { Plugin } from "rollup";
 import type { LibraryFormats, BuildOptions } from "vite";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 import {
   COMPONENTS_ENTRY,
   VUE_DEMI_IIFE,
   getComponentLibOutputDir,
-  VUE_LIB_MAP
+  VUE_LIB_MAP,
 } from "./path";
 import {
   EXTERNAL_LIBS,
@@ -17,6 +18,14 @@ import {
 import { UserConfig } from "vite";
 import { getCommonAlias } from "./alias";
 
+/** rollup 公共插件配置 */
+export function getPublicRollupPlugins(): Plugin[] {
+  return [
+    nodeResolve({
+      resolveOnly: ["lodash-es"],
+    }),
+  ];
+}
 /** 动态插入vue-demi运行时 */
 export function dynamicInjectVueDemiPlugin(): Plugin {
   const vueDemiRuntimeCode = readFileSync(VUE_DEMI_IIFE, "utf-8");
@@ -56,7 +65,10 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
         globals: {
           ...IIFE_GLOBALS_CONFIG,
         },
-        plugins: [dynamicInjectVueDemiPlugin()],
+        plugins: [
+          dynamicInjectVueDemiPlugin(),
+          ...getPublicRollupPlugins()
+        ],
       },
     },
   };
@@ -65,16 +77,16 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
 export function getBasicContainerViteConfig(version: VersionType): UserConfig {
   return {
     server: {
-      port: 2143
+      port: 2143,
     },
     resolve: {
       alias: {
         ...getCommonAlias(),
-        ...VUE_LIB_MAP[version]
+        ...VUE_LIB_MAP[version],
       },
     },
     build: {
-      ...getBasicBuildOptions(version)
-    }
+      ...getBasicBuildOptions(version),
+    },
   };
 }

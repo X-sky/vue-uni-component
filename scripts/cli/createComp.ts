@@ -2,7 +2,7 @@ import { dirname, resolve } from "node:path";
 import prompts from "prompts";
 import fg from "fast-glob";
 import { COMPONENTS_ROOT, UI_TEMPLATE_META, buildLog } from "~/utils";
-import { camelCase, capitalize } from "lodash";
+import { camelCase, capitalize } from "lodash-es";
 import { existsSync, mkdirSync, readFile, remove, writeFile } from "fs-extra";
 
 async function getComponentName() {
@@ -74,6 +74,7 @@ async function createTemplate(name: string) {
         }
       });
     }
+    // TODO: add component to components.ts
   } catch (err) {
     failCallback(err);
   }

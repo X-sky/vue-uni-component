@@ -18,6 +18,7 @@ import {
   buildLog,
   dynamicInjectVueDemiPlugin,
   getComponentLibOutputDir,
+  getPublicRollupPlugins,
   ROOT_DIR,
   UTILS_ENTRY,
 } from "~/utils";
@@ -96,7 +97,7 @@ configs.push({
       ],
     },
   ],
-  plugins: [dynamicInjectVueDemiPlugin(), esbuild(), copyMetaPlugin()],
+  plugins: [dynamicInjectVueDemiPlugin(), esbuild(), copyMetaPlugin(), ...getPublicRollupPlugins()],
   external: [...EXTERNAL_LIBS],
 });
 

@@ -1,4 +1,4 @@
-import { assign } from "lodash";
+import { assign } from "lodash-es";
 import { computed } from "vue-demi";
 
 /** 'uu' as short for uni-ui */
