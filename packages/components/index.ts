@@ -1,15 +1,15 @@
-import components from "./components";
-export * from "./UniTemplate";
+import * as components from "./components";
+export * from "./components";
 
 const install = (app: any) => {
-  components.forEach((c) => app.use(c));
+  for (const name in components) {
+    app.use(components[name as keyof typeof components]);
+  }
+  // components.forEach((c) => app.use(c));
 };
 
 const defaultExport = {
-  install
-}
+  install,
+};
 
-export {
-  defaultExport as default,
-  install
-}
+export { defaultExport as default, install };
