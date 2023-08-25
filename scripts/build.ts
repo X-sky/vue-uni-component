@@ -1,6 +1,6 @@
 import { removeSync } from "fs-extra";
 import fg from "fast-glob";
-import { execSync } from "node:child_process";
+import { execSync, exec } from "node:child_process";
 import { buildLog, OUTPUT_ROOT, ROOT_DIR } from "../utils";
 import { setPackageMeta } from "./packageMeta";
 import { setPackageTypes } from "./types";
@@ -26,11 +26,20 @@ async function main() {
     // remove cache
     removeSync(OUTPUT_ROOT);
     const containers = await getContainerEntries();
+    const buildTasks: Promise<void>[] = [];
     containers.forEach((containerDir) => {
-      execSync(`pnpm -F ./containers/${containerDir} build`, {
-        stdio: "inherit",
-      });
+      buildTasks.push(new Promise<void>((resolve, reject)=>{
+        exec(`pnpm -F ./containers/${containerDir} build`, (err)=>{
+          if (err) {
+            buildLog.error(err);
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      }))
     });
+    await Promise.all(buildTasks);
     buildLog.info("Copy component lib meta...");
     // do something
     containers.forEach((dir) => {
@@ -41,9 +50,7 @@ async function main() {
     });
     // build other libs
     buildLog.start("Rollup other packages...");
-    execSync(`pnpm run build:rollup`, {
-      stdio: "inherit",
-    });
+    execSync(`pnpm run build:rollup`);
 
     buildLog.success("All build tasks done");
     // buildLog.start("add additional build products...");
