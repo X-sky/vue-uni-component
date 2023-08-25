@@ -31,15 +31,15 @@ const VUE_DEMI_ENTRY_3 = resolve(VUE_DEMI_LIB, "v3/index.mjs");
 
 const VUE_ENTRY_2 = resolve(
   ROOT_DIR,
-  "node_modules/vue/dist/vue.runtime.esm.js"
+  "containers/v2/node_modules/vue/dist/vue.runtime.esm.js"
 );
 const VUE_ENTRY_27 = resolve(
   ROOT_DIR,
-  "node_modules/vue2/dist/vue.runtime.esm.js"
+  "containers/v2.7/node_modules/vue/dist/vue.runtime.esm.js"
 );
 const VUE_ENTRY_3 = resolve(
   ROOT_DIR,
-  "node_modules/vue3/dist/vue.runtime.esm-browser.js"
+  "containers/v3/node_modules/vue/dist/vue.runtime.esm-browser.js"
 );
 export const VUE_LIB_MAP: Record<VersionType, Record<'vue'|'vue-demi', string>> = {
   'v2': {
