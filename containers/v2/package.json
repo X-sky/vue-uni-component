@@ -19,7 +19,7 @@
     "vue-template-compiler": "~2.6.14"
   },
   "dependencies": {
-    "@vue-uni-ui/components": "workspace:^",
+    "@vue-uni-ui/components-test": "workspace:^",
     "vue": "~2.6.14"
   }
 }

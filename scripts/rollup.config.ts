@@ -12,7 +12,7 @@ import esbuild from "rollup-plugin-esbuild";
 import {
   UTILS_IIFE_NAME,
   IIFE_GLOBALS_CONFIG,
-  EXTERNAL_LIBS,
+  IIFE_EXTERNAL_LIBS,
 } from "~/meta/constants";
 import {
   buildLog,
@@ -98,7 +98,7 @@ configs.push({
     },
   ],
   plugins: [dynamicInjectVueDemiPlugin(), esbuild(), copyMetaPlugin(), ...getPublicRollupPlugins()],
-  external: [...EXTERNAL_LIBS],
+  external: [...IIFE_EXTERNAL_LIBS],
 });
 
 export default configs;

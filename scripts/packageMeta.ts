@@ -7,11 +7,13 @@ import {
   ROOT_DIR,
   UI_COMMON_META,
   fixDepsVer,
+  COMPONENTS_ROOT
 } from "../utils";
 
-import componentPackageJson from "../packages/components/package.json";
 import rootPackageJson from "../package.json";
 
+
+const componentPackageJson = readJsonSync(resolve(COMPONENTS_ROOT, "package.json"));
 function setPackageJson(version: VersionType) {
   const packageName = getComponentLibName(version);
   const basePackageInfo = readJsonSync(resolve(UI_COMMON_META, "base-package.json"));
@@ -31,7 +33,7 @@ function setPackageJson(version: VersionType) {
     )
   );
   // override devDependencies if has any
-  if (Object.getOwnPropertyNames(componentPackageJson.devDependencies).length) {
+  if (componentPackageJson.devDependencies && Object.getOwnPropertyNames(componentPackageJson.devDependencies).length) {
     basePackageInfo.devDependencies = Object.assign(
       {},
       componentPackageJson.devDependencies

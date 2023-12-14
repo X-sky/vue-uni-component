@@ -1,7 +1,7 @@
 import { removeSync } from "fs-extra";
 import fg from "fast-glob";
 import { execSync, exec } from "node:child_process";
-import { buildLog, OUTPUT_ROOT, ROOT_DIR } from "../utils";
+import { buildLog, cleanLogFile, OUTPUT_ROOT, ROOT_DIR } from "../utils";
 import { setPackageMeta } from "./packageMeta";
 import { setPackageTypes } from "./types";
 import { isValidVersionType } from "~/meta/constants";
@@ -18,9 +18,11 @@ async function getContainerEntries() {
 
 async function main() {
   try {
-    buildLog.start("Prepare build steps...\n");
+    // remove log file
+    cleanLogFile();
     // prepare before build
-    // # no works for now
+    buildLog.start("Prepare build steps...\n");
+    // no works for now
 
     buildLog.start("Build component packages...");
     // remove cache
@@ -34,6 +36,7 @@ async function main() {
             buildLog.error(err);
             reject(err);
           } else {
+            buildLog.success(`${containerDir} build`);
             resolve();
           }
         });

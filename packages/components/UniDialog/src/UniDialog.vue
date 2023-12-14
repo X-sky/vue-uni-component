@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { useUniTheme } from "@vue-uni-ui/utils";
+import { computed } from "vue-demi";
 useUniTheme();
 
-
-withDefaults(
+const props = withDefaults(
   defineProps<{
     mask: boolean;
     visible: boolean;
@@ -12,13 +12,23 @@ withDefaults(
     mask: false,
   }
 );
+const emits = defineEmits<{
+  (e: "update:visible", payload: boolean): void;
+}>();
+
+const stateVisible = computed({
+  set(v: boolean) {
+    emits("update:visible", v);
+  },
+  get() {
+    return props.visible;
+  },
+});
 </script>
 <template>
-  <div class="uu-dialog">
+  <div class="uu-dialog" v-if="stateVisible">
     <div v-if="mask" class="uu-dialog__mask"></div>
-    <div class="uu-dialog__container">
-      我是个平凡的弹窗
-    </div>
+    <div class="uu-dialog__container">我是个平凡的弹窗</div>
   </div>
 </template>
 <style lang="scss">
@@ -32,7 +42,7 @@ withDefaults(
     height: 100vh;
     background-color: var(--uu-color-info);
     filter: blur(4px);
-    opacity: 0.3
+    opacity: 0.3;
   }
   &__container {
     position: fixed;

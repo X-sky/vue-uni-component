@@ -15,5 +15,6 @@
     "skipDefaultLibCheck": true,
     "noUnusedLocals": true,
     "noImplicitAny": true
-  }
+  },
+  "exclude": ["node_modules", "**/*.md", "**/dist"]
 }

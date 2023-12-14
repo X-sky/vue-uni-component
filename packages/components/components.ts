@@ -1,3 +1,2 @@
-export * from "./UniTemplate";
-export * from "./UniDialog";
-
+export * from './UniDialog';
+export * from './UniTemplate';

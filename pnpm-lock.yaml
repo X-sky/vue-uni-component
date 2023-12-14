@@ -89,9 +89,9 @@ importers:
 
   containers/v2:
     dependencies:
-      '@vue-uni-ui/components':
+      '@vue-uni-ui/components-test':
         specifier: workspace:^
-        version: link:../../packages/components
+        version: link:../../packages/components-test
       vue:
         specifier: ~2.6.14
         version: registry.npmmirror.com/vue@2.6.14
@@ -140,6 +140,12 @@ importers:
       '@vue-uni-ui/utils':
         specifier: workspace:^
         version: link:../utils
+
+  packages/components-test:
+    dependencies:
+      '@vue-uni-ui/components':
+        specifier: workspace:^
+        version: link:../components
 
   packages/utils: {}
 

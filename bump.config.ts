@@ -2,9 +2,9 @@ import {defineConfig} from 'bumpp';
 
 export default defineConfig({
   all: false,
-  commit: false,
+  commit: "chore: release v%s",
   preid: 'beta',
-  tag: false,
+  tag: true,
   push: false,
   files: ["package.json", "packages/**/package.json", "containers/**/package.json"]
 })

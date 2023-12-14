@@ -2,11 +2,14 @@ import { resolve } from "node:path";
 import { LibSuffix, getComponentLibName, VersionType } from "../meta/constants";
 
 export const ROOT_DIR = resolve(__dirname, "..");
+export const LOG_FILE_PATH = resolve(ROOT_DIR, './build.log');
 
 // <----------------- source code path ----------------->
 export const PACKAGES_ROOT = resolve(ROOT_DIR, "packages");
 export const COMPONENTS_ROOT = resolve(PACKAGES_ROOT, 'components');
 export const COMPONENTS_ENTRY = resolve(COMPONENTS_ROOT, "index.ts");
+export const COMPONENTS_TEST_ROOT = resolve(PACKAGES_ROOT, 'components-test');
+export const COMPONENTS_TEST_ENTRY = resolve(COMPONENTS_TEST_ROOT, "index.ts");
 export const UTILS_ENTRY = resolve(PACKAGES_ROOT, "utils/index.ts");
 
 export const META_ROOT = resolve(ROOT_DIR, "meta");

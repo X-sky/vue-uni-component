@@ -9,8 +9,8 @@ import {
   VUE_LIB_MAP,
 } from "./path";
 import {
-  EXTERNAL_LIBS,
-  IIFE_GLOBALS_CONFIG,
+  MODULES_EXTERNAL_LIBS,
+  MODULES_GLOBALS_CONFIG,
   UI_LIB_IIFE_NAME,
   VersionType,
 } from "../meta/constants";
@@ -50,18 +50,21 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
       formats: ["es", "cjs", "iife"],
       name: UI_LIB_IIFE_NAME,
       fileName: (format) => {
-        if (format === "es") {
-          return "index.mjs";
-        } else {
-          return `index.${format}.js`;
+        switch (format) {
+          case 'cjs':
+            return 'index.cjs';
+          case 'es':
+            return 'index.mjs';
+          default: 
+            return `index.${format}.js`;
         }
       },
     },
     rollupOptions: {
-      external: EXTERNAL_LIBS,
+      external: MODULES_EXTERNAL_LIBS,
       output: {
         globals: {
-          ...IIFE_GLOBALS_CONFIG,
+          ...MODULES_GLOBALS_CONFIG,
         },
         plugins: [dynamicInjectVueDemiPlugin(), ...getPublicRollupPlugins()],
       },

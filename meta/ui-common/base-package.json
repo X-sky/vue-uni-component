@@ -5,7 +5,7 @@
   "keywords": ["vue", "components", "vue-demi"],
   "author": "",
   "license": "MIT",
-  "main": "index.mjs",
+  "main": "index.cjs",
   "jsdelivr": "index.iife.js",
   "unpkg": "index.iife.js",
   "module": "index.mjs",
@@ -18,7 +18,5 @@
     },
     "./*": "./*"
   },
-  "dependencies": {
-    "vue-demi": "^0.14.5"
-  }
+  "dependencies": {}
 }
