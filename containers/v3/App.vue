@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import TestUniDialog from "../../packages/components-test/TestUniDialog/TestUniDialog.vue";
+import { TestUniDialog, TestUniIcon } from "@vue-uni-ui/components-test";
 
 const title = ref("Vue3 App Title");
 </script>
@@ -8,5 +8,6 @@ const title = ref("Vue3 App Title");
   <div>
     <h1>{{ title }}</h1>
     <TestUniDialog />
+    <TestUniIcon />
   </div>
 </template>

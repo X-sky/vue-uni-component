@@ -1,4 +1,5 @@
 
 import TestUniDialog from "./TestUniDialog/TestUniDialog.vue"
-export { TestUniDialog };
+import TestUniIcon from "./TestUniIcon/TestUniIcon.vue"
+export { TestUniDialog, TestUniIcon };
   

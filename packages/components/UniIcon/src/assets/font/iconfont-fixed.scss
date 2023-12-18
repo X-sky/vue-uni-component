@@ -1,0 +1,22 @@
+
+@font-face {
+  font-family: "iconfont"; /* Project id 4373879 */
+  /**
+  * @warning DO NOT USE RELATIVE PATH
+  * @description: using relative url will lead to ttf 404 error since vite will resolve assets under root directory if no resolve alias specified. Instead using alias, and vite will resolve url file into base64.
+  */
+  // src: url('./iconfont.woff2') format('woff2'),
+  //      url('./iconfont.woff') format('woff'),
+  //      url('./iconfont.ttf') format('truetype');
+  src: url('~/packages/components/UniIcon/src/assets/font/iconfont.woff2') format('woff2'),
+       url('~/packages/components/UniIcon/src/assets/font/iconfont.woff') format('woff'),
+       url('~/packages/components/UniIcon/src/assets/font/iconfont.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
