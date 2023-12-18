@@ -120,8 +120,8 @@ async function createTestUnit(upperCasedName: string) {
   const targetVueFile = resolve(targetFileDir, `${testName}.vue`);
   const targetVueTplStr = `
 <script lang="ts" setup>
-  import { ref } from 'vue-demi';
-  const tempRef = ref(0);
+import { ref } from 'vue-demi';
+const tempRef = ref(0);
 </script>
 <template>
   <div>
