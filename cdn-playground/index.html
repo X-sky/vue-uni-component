@@ -7,14 +7,22 @@
     <link rel="stylesheet" href="./lib/dist/style.css" />
   </head>
   <body>
-    <!-- ######component area -->
-    <div id="app">
+    <!-- ######vue2.6 -->
+    <!-- <div id="app">
       <uni-template></uni-template>
-      <uni-icon icon="github" ></uni-icon>
-      <uni-icon icon="close" type="danger" ></uni-icon>
+      <button @click="openUniDialog">open dialog</button>
+      <uni-dialog
+        :visible.sync="dialogVisible"
+        @update:visible="updateVisible"
+        mask
+        close-on-click-mask
+      >
+        I'm a simple Dialog
+      </uni-dialog>
+      <uni-icon icon="github"></uni-icon>
+      <uni-icon icon="close" type="danger"></uni-icon>
     </div>
 
-    <!-- ######vue2.6 -->
     <script src="./lib/vue/2.6/vue@2.6.14.js"></script>
     <script src="./lib/vue/2.6/composition-api@1.7.1.prod.js"></script>
     <script src="./lib/dist/index_utils.js"></script>
@@ -24,47 +32,97 @@
       Vue.use(__VUE_UNI_COMP__);
       new Vue({
         el: "#app",
+        data() {
+          return {
+            dialogVisible: false,
+          };
+        },
+        methods: {
+          openUniDialog() {
+            this.dialogVisible = true;
+          },
+          updateVisible(v) {
+            this.dialogVisible = v;
+          },
+        },
       });
-
-      const getAutoUpdateObj = () => {
-        let _num = 0;
-        const obj = {};
-        Object.defineProperty(obj, num, {
-          get() {
-            return _num;
-          },
-          set(newNum) {
-            _num = newNum;
-            // 做些什么：比如发送请求
-          },
-        });
-        return obj;
-      };
-      // 使用的时候
-      const obj = getAutoUpdateObj();
-      obj.num = 2;
-    </script>
+    </script> -->
 
     <!-- #####vue2.7 -->
-    <!-- <script src="./lib/vue/2.7/vue@2.7.14.js"></script>
+    <!-- <div id="app">
+      <uni-template></uni-template>
+      <button @click="openUniDialog">open dialog</button>
+      <uni-dialog
+        :visible.sync="dialogVisible"
+        @update:visible="updateVisible"
+        mask
+        close-on-click-mask
+      >
+        I'm a simple Dialog
+      </uni-dialog>
+      <uni-icon icon="github"></uni-icon>
+      <uni-icon icon="close" type="danger"></uni-icon>
+    </div>
+    <script src="./lib/vue/2.7/vue@2.7.14.js"></script>
     <script src="./lib/dist/index_utils.js"></script>
     <script src="./lib/dist/index_v2.7.js"></script>
     <script>
       Vue.use(__VUE_UNI_COMP__);
       new Vue({
         el: "#app",
+        data() {
+          return {
+            dialogVisible: false,
+          };
+        },
+        methods: {
+          openUniDialog() {
+            this.dialogVisible = true;
+          },
+          updateVisible(v) {
+            this.dialogVisible = v;
+          },
+        },
       });
     </script> -->
 
     <!-- #####vue3 -->
-    <!-- <script src="./lib/vue/3/vue@3.2.47.global.js"></script>
+    <div id="app">
+      <uni-template></uni-template>
+      <button @click="openUniDialog">open dialog</button>
+      <uni-dialog
+        :visible.sync="dialogVisible"
+        @update:visible="updateVisible"
+        mask
+        close-on-click-mask
+      >
+        I'm a simple Dialog
+      </uni-dialog>
+      <uni-icon icon="github"></uni-icon>
+      <uni-icon icon="close" type="danger"></uni-icon>
+    </div>
+    <script src="./lib/vue/3/vue@3.2.47.global.js"></script>
     <script src="./lib/dist/index_utils.js"></script>
     <script src="./lib/dist/index_v3.js"></script>
     <script>
-      const App = {};
+      const App = {
+        data() {
+          return {
+            dialogVisible: false,
+          };
+        },
+        methods: {
+          openUniDialog() {
+            this.dialogVisible = true;
+          },
+          updateVisible(v) {
+            this.dialogVisible = v;
+          },
+        },
+      };
       const app = Vue.createApp(App);
       app.use(__VUE_UNI_COMP__);
       app.mount("#app");
-    </script> -->
+    </script>
   </body>
 </html>
