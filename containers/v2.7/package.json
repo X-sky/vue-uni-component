@@ -16,7 +16,7 @@
     "@vitejs/plugin-vue2": "^2.2.0"
   },
   "dependencies": {
-    "@vue-uni-ui/components": "workspace:^",
+    "@vue-uni-ui/components-test": "workspace:^",
     "vue": "^2.7.14"
   }
 }

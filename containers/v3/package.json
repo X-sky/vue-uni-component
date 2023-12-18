@@ -16,7 +16,7 @@
     "@vitejs/plugin-vue": "^4.2.3"
   },
   "dependencies": {
-    "@vue-uni-ui/components": "workspace:^",
+    "@vue-uni-ui/components-test": "workspace:^",
     "vue": "~3.2.47"
   }
 }

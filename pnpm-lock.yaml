@@ -67,7 +67,7 @@ importers:
         specifier: ^5.0.1
         version: registry.npmmirror.com/rimraf@5.0.1
       rollup:
-        specifier: ^3.27.0
+        specifier: ~3.27.0
         version: registry.npmmirror.com/rollup@3.27.0
       rollup-plugin-esbuild:
         specifier: ^5.0.0
@@ -82,7 +82,7 @@ importers:
         specifier: ~4.4.7
         version: registry.npmmirror.com/vite@4.4.7(@types/node@20.4.5)(sass@1.65.1)
       vue:
-        specifier: ~3.2.47
+        specifier: 3.2.47
         version: registry.npmmirror.com/vue@3.2.47
 
   cdn-playground: {}
@@ -111,9 +111,9 @@ importers:
 
   containers/v2.7:
     dependencies:
-      '@vue-uni-ui/components':
+      '@vue-uni-ui/components-test':
         specifier: workspace:^
-        version: link:../../packages/components
+        version: link:../../packages/components-test
       vue:
         specifier: ^2.7.14
         version: registry.npmmirror.com/vue@2.7.14
@@ -124,9 +124,9 @@ importers:
 
   containers/v3:
     dependencies:
-      '@vue-uni-ui/components':
+      '@vue-uni-ui/components-test':
         specifier: workspace:^
-        version: link:../../packages/components
+        version: link:../../packages/components-test
       vue:
         specifier: ~3.2.47
         version: registry.npmmirror.com/vue@3.2.47
