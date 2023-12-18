@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import UniIcon from "../../UniIcon";
 import { useUniTheme } from "@vue-uni-ui/utils";
 import { CSSProperties, computed } from "vue-demi";
 useUniTheme();
@@ -72,7 +73,9 @@ const customStyle = computed<CSSProperties>(() => {
     <div v-if="mask" class="uu-dialog-mask" @click="clickMask"></div>
     <div class="uu-dialog-container" :style="customStyle">
       <div class="uu-dialog-header">
-        <div class="uu-dialog-close-icon" @click="closeModal">x</div>
+        <div class="uu-dialog-close-icon" @click="closeModal">
+          <UniIcon icon="close" />
+        </div>
         <slot name="title">
           <span v-if="title" class="uu-dialog-header-title">
             {{ title }}
@@ -141,11 +144,7 @@ $headerHeight: 60px;
   position: absolute;
   top: 15px;
   right: 21px;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--uu-color-font-regular);
-  cursor: pointer;
-  &:hover {
-    opacity: 0.7;
-  }
 }
 </style>
