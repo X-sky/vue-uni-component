@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import { createVuePlugin as vue2 } from "vite-plugin-vue2";
@@ -6,7 +7,7 @@ import { merge } from "lodash-es";
 import { getBasicContainerViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
-  // @ts-ignore vite-plugin-vue2 reaches EOL in Dec. 2022 and not support vite5 type
+  // @ts-ignore vite-plugin-vue2 reaches EOL in Dec. 2022 and not supports vite5 type anymore
   plugins: [vue2(), setupScriptPlugin({})],
   server: {
     port: 2000,
@@ -20,5 +21,4 @@ const customConfig = defineConfig({
     },
   },
 });
-
 export default merge(getBasicContainerViteConfig("v2"), customConfig);

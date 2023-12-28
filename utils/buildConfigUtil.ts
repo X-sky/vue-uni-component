@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import type { LibraryFormats, BuildOptions, UserConfig } from "vite";
+import { configDefaults } from "vitest/config";
 import type { Plugin as RollupPlugin } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import {
@@ -7,6 +8,7 @@ import {
   VUE_DEMI_IIFE,
   getComponentLibOutputDir,
   VUE_LIB_MAP,
+  getContainerDir,
 } from "./path";
 import {
   MODULES_EXTERNAL_LIBS,
@@ -15,6 +17,7 @@ import {
   VersionType,
 } from "../meta/constants";
 import { getCommonAlias } from "./alias";
+import { merge } from "lodash-es";
 
 /** rollup 公共插件配置 */
 export function getPublicRollupPlugins(): RollupPlugin[] {
@@ -32,7 +35,7 @@ export function dynamicInjectVueDemiPlugin(): RollupPlugin {
     name: "inject-vue-demi-runtime",
     renderChunk(code, chunks) {
       if (injectFormatList.some((format) => chunks.fileName.includes(format))) {
-        return `${vueDemiRuntimeCode};\n;${code}`;
+        return `${vueDemiRuntimeCode}\n${code}`;
       } else {
         return code;
       }
@@ -51,11 +54,11 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
       name: UI_LIB_IIFE_NAME,
       fileName: (format) => {
         switch (format) {
-          case 'cjs':
-            return 'index.cjs';
-          case 'es':
-            return 'index.mjs';
-          default: 
+          case "cjs":
+            return "index.cjs";
+          case "es":
+            return "index.mjs";
+          default:
             return `index.${format}.js`;
         }
       },
@@ -86,5 +89,42 @@ export function getBasicContainerViteConfig(version: VersionType): UserConfig {
     build: {
       ...getBasicBuildOptions(version),
     },
+    test: {
+      root: getContainerDir(version),
+      include: [
+        ...configDefaults.include,
+        ...configDefaults.include.map(
+          (p) => `../../packages/{components,utils}/${p}`
+        ),
+      ],
+      exclude: [
+        ...configDefaults.exclude,
+        ...configDefaults.exclude.map(
+          (p) => `../../packages/{components,utils}/**/${p}`
+        ),
+      ],
+    },
   };
+}
+
+interface CustomViteConfig extends Partial<UserConfig> {
+  /** vue版本 */
+  vueVersion: VersionType;
+}
+export function mergeViteConfig(customConfig: CustomViteConfig): UserConfig {
+  const defaultConfig: UserConfig = {
+    server: {
+      port: 2143,
+    },
+    resolve: {
+      alias: {
+        ...getCommonAlias(),
+        ...VUE_LIB_MAP[customConfig.vueVersion],
+      },
+    },
+    build: {
+      ...getBasicBuildOptions(customConfig.vueVersion),
+    },
+  };
+  return merge({}, defaultConfig, customConfig);
 }

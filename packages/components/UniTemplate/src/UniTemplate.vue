@@ -22,9 +22,9 @@ const title = computed(() => `${props.msg}, Vue@${version}`);
       {{ title }}
     </h1>
     <div>
-      <button @click="increase">+</button>
-      <span>{{ num }}</span>
-      <button @click="decrease">-</button>
+      <button @click="increase" data-test="increase">+</button>
+      <span data-test="num">{{ num }}</span>
+      <button @click="decrease" data-test="decrease">-</button>
     </div>
   </div>
 </template>

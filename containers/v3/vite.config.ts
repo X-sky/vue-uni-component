@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import vue3 from "@vitejs/plugin-vue";
 import { merge } from "lodash-es";
