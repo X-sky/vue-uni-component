@@ -6,6 +6,7 @@ import { merge } from "lodash-es";
 import { getBasicContainerViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
+  // @ts-ignore vite-plugin-vue2 reaches EOL in Dec. 2022 and not support vite5 type
   plugins: [vue2(), setupScriptPlugin({})],
   server: {
     port: 2000,
