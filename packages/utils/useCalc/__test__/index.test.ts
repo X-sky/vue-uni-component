@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { useCalc } from "./index";
+import { useCalc } from "../index";
 
 test("useCalc hook test", () => {
   const { num, increase, decrease } = useCalc();
