@@ -44,7 +44,7 @@
     "rollup-plugin-esbuild": "^6.1.0",
     "sass": "^1.65.1",
     "typescript": "^5.1.6",
-    "vite": "~5.0.10",
+    "vite": "^5.2.10",
     "vitest": "^1.1.0",
     "vue": "3.2.47"
   },
@@ -60,8 +60,7 @@
       }
     },
     "overrides": {
-      "vue-demi": "$vue-demi",
-      "vite": "$vite"
+      "vite": "^5.2.10"
     }
   }
 }

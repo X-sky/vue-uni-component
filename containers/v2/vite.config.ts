@@ -5,7 +5,6 @@ import setupScriptPlugin from "unplugin-vue2-script-setup/vite";
 import { mergeViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
-  // @ts-ignore vite-plugin-vue2 reaches EOL in Dec. 2022 and not supports vite5 type anymore
   plugins: [vue2(), setupScriptPlugin({})],
   server: {
     port: 2000,
