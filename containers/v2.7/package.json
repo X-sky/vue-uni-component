@@ -8,14 +8,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "vitest run"
+    "test": "vitest run --silent"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@vitejs/plugin-vue2": "^2.3.1",
-    "@vue/compiler-sfc": "2.7.14"
+    "vite": "^5.0.0",
+    "@vitejs/plugin-vue2": "^2.3.1"
   },
   "dependencies": {
     "@vue-uni-ui/components-test": "workspace:^",

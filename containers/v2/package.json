@@ -13,6 +13,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "vite": "^4.4.7",
     "@vue/composition-api": "^1.7.1",
     "@vue/test-utils": "1",
     "unplugin-vue2-script-setup": "^0.11.4",

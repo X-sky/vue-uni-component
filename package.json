@@ -23,7 +23,7 @@
   "author": "ttse",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-node-resolve": "15.2.3",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash-es": "^4.17.8",
     "@types/node": "^20.4.5",
@@ -40,11 +40,11 @@
     "lodash-es": "^4.17.21",
     "prompts": "^2.4.2",
     "rimraf": "^5.0.1",
-    "rollup": "~4.9.1",
-    "rollup-plugin-esbuild": "^6.1.0",
+    "rollup": "^4.13.0",
+    "rollup-plugin-esbuild": "^6.1.1",
     "sass": "^1.65.1",
     "typescript": "^5.1.6",
-    "vite": "~5.0.10",
+    "vite": "^5.2.10",
     "vitest": "^1.1.0",
     "vue": "3.2.47"
   },
@@ -60,8 +60,7 @@
       }
     },
     "overrides": {
-      "vue-demi": "$vue-demi",
-      "vite": "$vite"
+      "vite": "^5.2.10"
     }
   }
 }

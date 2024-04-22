@@ -1,8 +1,6 @@
 import { defineConfig } from "vite";
 import vue3 from "@vitejs/plugin-vue";
-import { getBasicContainerViteConfig, mergeViteConfig } from "../../utils";
-
-const config = getBasicContainerViteConfig("v3");
+import { mergeViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
   plugins: [vue3()],

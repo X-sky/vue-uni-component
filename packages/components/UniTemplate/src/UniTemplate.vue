@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, version } from "vue-demi";
 import { useCalc, useUniTheme } from "@vue-uni-ui/utils";
-
+import {DEFAULT_MSG} from './constants';
 useUniTheme();
 
 const props = withDefaults(
@@ -9,7 +9,7 @@ const props = withDefaults(
     msg: string;
   }>(),
   {
-    msg: "Hello",
+    msg: DEFAULT_MSG,
   }
 );
 const { num, increase, decrease } = useCalc();

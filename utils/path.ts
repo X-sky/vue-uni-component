@@ -28,10 +28,8 @@ export const getComponentLibOutputDir = (libName: LibSuffix) =>
 export const VUE_DEMI_LIB = resolve(ROOT_DIR, "node_modules/vue-demi/lib");
 
 export const VUE_DEMI_IIFE = resolve(VUE_DEMI_LIB, "index.iife.js");
-
-const VUE_DEMI_ENTRY_2 = resolve(VUE_DEMI_LIB, "v2/index.mjs");
-const VUE_DEMI_ENTRY_27 = resolve(VUE_DEMI_LIB, "v2.7/index.mjs");
-const VUE_DEMI_ENTRY_3 = resolve(VUE_DEMI_LIB, "v3/index.mjs");
+export const getVueDemiEntry = (v: VersionType) =>
+  resolve(VUE_DEMI_LIB, v, "index.mjs");
 
 export const getContainerDir = (v: VersionType) =>
   resolve(ROOT_DIR, `containers/${v}`);
@@ -42,34 +40,6 @@ export const getVueEntry = (v: VersionType) =>
 export const getVueTestEntry = (v: VersionType) =>
   resolve(getContainerDir(v), "node_modules/@vue/test-utils");
 
-export const VUE_LIB_MAP: Record<
-  VersionType,
-  Record<"vue" | "vue-demi", string>
-> = {
-  v2: {
-    "vue-demi": VUE_DEMI_ENTRY_2,
-    vue: getVueEntry("v2"),
-  },
-  "v2.7": {
-    "vue-demi": VUE_DEMI_ENTRY_27,
-    vue: getVueEntry("v2.7"),
-  },
-  v3: {
-    "vue-demi": VUE_DEMI_ENTRY_3,
-    vue: getVueEntry("v3"),
-  },
-};
-export const VUE_LIB_TEST_MAP = {
-  v2: {
-    "@vue/test-utils": getVueTestEntry("v2"),
-  },
-  "v2.7": {
-    "@vue/test-utils": getVueTestEntry("v2"),
-  },
-  v3: {
-    "@vue/test-utils": getVueTestEntry("v3"),
-  },
-};
 export const CDN_CONTAINER_PATH = resolve(ROOT_DIR, "cdn-playground");
 export const CDN_CONTAINER_DIST_PATH = resolve(
   CDN_CONTAINER_PATH,
