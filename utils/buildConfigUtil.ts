@@ -8,8 +8,6 @@ import {
   COMPONENTS_ENTRY,
   VUE_DEMI_IIFE,
   getComponentLibOutputDir,
-  VUE_LIB_MAP,
-  VUE_LIB_TEST_MAP,
   ROOT_DIR,
   getContainerDir,
 } from "./path";
@@ -19,7 +17,11 @@ import {
   UI_LIB_IIFE_NAME,
   VersionType,
 } from "../meta/constants";
-import { getCommonAlias } from "./alias";
+import {
+  getCommonAlias,
+  getVueLibAliases,
+  getVueLibTestAliases,
+} from "./alias";
 
 /** rollup 公共插件配置 */
 export function getPublicRollupPlugins(): RollupPlugin[] {
@@ -86,7 +88,7 @@ export function getBasicContainerViteConfig(version: VersionType): UserConfig {
     resolve: {
       alias: {
         ...getCommonAlias(),
-        ...VUE_LIB_MAP[version],
+        ...getVueLibAliases(version),
       },
     },
     build: {
@@ -101,7 +103,7 @@ export function getBasicContainerViteConfig(version: VersionType): UserConfig {
       environment: "jsdom",
       cache: false,
       alias: {
-        ...VUE_LIB_TEST_MAP[version],
+        ...getVueLibTestAliases(version),
       },
       dir: ROOT_DIR,
       server: {
