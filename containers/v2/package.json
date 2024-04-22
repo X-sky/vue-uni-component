@@ -4,22 +4,23 @@
   "private": true,
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "test": "vitest run --silent"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@vue/composition-api": "^1.7.1",
+    "@vue/test-utils": "1",
     "unplugin-vue2-script-setup": "^0.11.4",
     "vite-plugin-vue2": "^2.0.3",
-    "vue-template-compiler": "~2.6.14"
+    "vue-template-compiler": "2.6.14"
   },
   "dependencies": {
     "@vue-uni-ui/components-test": "workspace:^",
-    "vue": "~2.6.14"
+    "vue": "2.6.14"
   }
 }

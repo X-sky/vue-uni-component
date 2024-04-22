@@ -1,10 +1,8 @@
-/// <reference types="vitest" />
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import { createVuePlugin as vue2 } from "vite-plugin-vue2";
 import setupScriptPlugin from "unplugin-vue2-script-setup/vite";
-import { merge } from "lodash-es";
-import { getBasicContainerViteConfig } from "../../utils";
+import { mergeViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
   // @ts-ignore vite-plugin-vue2 reaches EOL in Dec. 2022 and not supports vite5 type anymore
@@ -21,4 +19,7 @@ const customConfig = defineConfig({
     },
   },
 });
-export default merge(getBasicContainerViteConfig("v2"), customConfig);
+export default mergeViteConfig({
+  vueVersion: "v2",
+  ...customConfig,
+});

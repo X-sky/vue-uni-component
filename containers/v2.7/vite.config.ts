@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import vue27 from "@vitejs/plugin-vue2";
-import { merge } from "lodash-es";
-import { getBasicContainerViteConfig } from "../../utils";
+import { mergeViteConfig } from "../../utils";
 
 const customConfig = defineConfig({
   plugins: [vue27()],
@@ -10,4 +9,7 @@ const customConfig = defineConfig({
   },
 });
 
-export default merge(getBasicContainerViteConfig("v2.7"), customConfig);
+export default mergeViteConfig({
+  vueVersion: "v2.7",
+  ...customConfig,
+});

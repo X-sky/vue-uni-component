@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import type { LibraryFormats, BuildOptions, UserConfig } from "vite";
+import { mergeConfig } from "vite";
 import { configDefaults } from "vitest/config";
 import type { Plugin as RollupPlugin } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
@@ -8,6 +9,8 @@ import {
   VUE_DEMI_IIFE,
   getComponentLibOutputDir,
   VUE_LIB_MAP,
+  VUE_LIB_TEST_MAP,
+  ROOT_DIR,
   getContainerDir,
 } from "./path";
 import {
@@ -17,7 +20,6 @@ import {
   VersionType,
 } from "../meta/constants";
 import { getCommonAlias } from "./alias";
-import { merge } from "lodash-es";
 
 /** rollup 公共插件配置 */
 export function getPublicRollupPlugins(): RollupPlugin[] {
@@ -77,6 +79,7 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
 
 export function getBasicContainerViteConfig(version: VersionType): UserConfig {
   return {
+    root: getContainerDir(version),
     server: {
       port: 2143,
     },
@@ -90,19 +93,22 @@ export function getBasicContainerViteConfig(version: VersionType): UserConfig {
       ...getBasicBuildOptions(version),
     },
     test: {
-      root: getContainerDir(version),
       include: [
-        ...configDefaults.include,
         ...configDefaults.include.map(
-          (p) => `../../packages/{components,utils}/${p}`
+          (p) => `packages/{components,utils}/${p}`
         ),
       ],
-      exclude: [
-        ...configDefaults.exclude,
-        ...configDefaults.exclude.map(
-          (p) => `../../packages/{components,utils}/**/${p}`
-        ),
-      ],
+      environment: "jsdom",
+      cache: false,
+      alias: {
+        ...VUE_LIB_TEST_MAP[version],
+      },
+      dir: ROOT_DIR,
+      server: {
+        deps: {
+          inline: ["vue", "vue-demi"],
+        },
+      },
     },
   };
 }
@@ -112,19 +118,8 @@ interface CustomViteConfig extends Partial<UserConfig> {
   vueVersion: VersionType;
 }
 export function mergeViteConfig(customConfig: CustomViteConfig): UserConfig {
-  const defaultConfig: UserConfig = {
-    server: {
-      port: 2143,
-    },
-    resolve: {
-      alias: {
-        ...getCommonAlias(),
-        ...VUE_LIB_MAP[customConfig.vueVersion],
-      },
-    },
-    build: {
-      ...getBasicBuildOptions(customConfig.vueVersion),
-    },
-  };
-  return merge({}, defaultConfig, customConfig);
+  const defaultConfig: UserConfig = getBasicContainerViteConfig(
+    customConfig.vueVersion
+  );
+  return mergeConfig(defaultConfig, customConfig);
 }

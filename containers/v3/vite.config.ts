@@ -1,8 +1,6 @@
-/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import vue3 from "@vitejs/plugin-vue";
-import { merge } from "lodash-es";
-import { getBasicContainerViteConfig } from "../../utils";
+import { getBasicContainerViteConfig, mergeViteConfig } from "../../utils";
 
 const config = getBasicContainerViteConfig("v3");
 
@@ -13,4 +11,7 @@ const customConfig = defineConfig({
   },
 });
 
-export default merge({}, config, customConfig);
+export default mergeViteConfig({
+  vueVersion: "v3",
+  ...customConfig,
+});
