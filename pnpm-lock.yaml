@@ -72,8 +72,8 @@ importers:
         specifier: ^4.13.0
         version: 4.16.1
       rollup-plugin-esbuild:
-        specifier: ^6.1.0
-        version: 6.1.0(esbuild@0.20.2)(rollup@4.16.1)
+        specifier: ^6.1.1
+        version: 6.1.1(esbuild@0.20.2)(rollup@4.16.1)
       sass:
         specifier: ^1.65.1
         version: 1.65.1
@@ -3448,8 +3448,8 @@ packages:
       glob: 10.3.12
     dev: true
 
-  /rollup-plugin-esbuild@6.1.0(esbuild@0.20.2)(rollup@4.16.1):
-    resolution: {integrity: sha512-HPpXU65V8bSpW8eSYPahtUJaJHmbxJGybuf/M8B3bz/6i11YaYHlNNJIQ38gSEV0FyohQOgVxJ2YMEEZtEmwvA==}
+  /rollup-plugin-esbuild@6.1.1(esbuild@0.20.2)(rollup@4.16.1):
+    resolution: {integrity: sha512-CehMY9FAqJD5OUaE/Mi1r5z0kNeYxItmRO2zG4Qnv2qWKF09J2lTy5GUzjJR354ZPrLkCj4fiBN41lo8PzBUhw==}
     engines: {node: '>=14.18.0'}
     peerDependencies:
       esbuild: '>=0.18.0'
