@@ -1,10 +1,4 @@
-import {
-  copyFile,
-  existsSync,
-  mkdirSync,
-  readJsonSync,
-  writeJSON,
-} from "fs-extra";
+import { copyFile, ensureDirSync, readJsonSync, writeJSON } from "fs-extra";
 import { dirname, resolve, extname } from "node:path";
 import type { RollupOptions, Plugin } from "rollup";
 import type { Options as ESBuildOptions } from "rollup-plugin-esbuild";
@@ -18,7 +12,7 @@ import {
   buildLog,
   dynamicInjectVueDemiPlugin,
   getComponentLibOutputDir,
-  getPublicRollupPlugins,
+  getPublicRollupInputPlugins,
   ROOT_DIR,
   UTILS_ENTRY,
 } from "~/utils";
@@ -39,9 +33,7 @@ function copyMetaPlugin(): Plugin {
     buildEnd() {
       buildLog.info("Copy utils meta...");
       const metaFileNames = ["package.json", "README.md"];
-      if (!existsSync(outDir)) {
-        mkdirSync(outDir);
-      }
+      ensureDirSync(outDir);
       metaFileNames.forEach((fileName) => {
         const sourceFilePath = resolve(dirname(UTILS_ENTRY), fileName);
         const targetFilePath = resolve(outDir, fileName);
@@ -97,7 +89,12 @@ configs.push({
       ],
     },
   ],
-  plugins: [dynamicInjectVueDemiPlugin(), esbuild(), copyMetaPlugin(), ...getPublicRollupPlugins()],
+  plugins: [
+    dynamicInjectVueDemiPlugin(),
+    esbuild(),
+    copyMetaPlugin(),
+    ...getPublicRollupInputPlugins(),
+  ],
   external: [...IIFE_EXTERNAL_LIBS],
 });
 

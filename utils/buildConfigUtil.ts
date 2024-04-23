@@ -4,12 +4,14 @@ import { mergeConfig } from "vite";
 import { configDefaults } from "vitest/config";
 import type { Plugin as RollupPlugin } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
+import { getBabelOutputPlugin } from "@rollup/plugin-babel";
 import {
   COMPONENTS_ENTRY,
   VUE_DEMI_IIFE,
   getComponentLibOutputDir,
   ROOT_DIR,
   getContainerDir,
+  BABEL_CFG_PATH,
 } from "./path";
 import {
   MODULES_EXTERNAL_LIBS,
@@ -23,12 +25,33 @@ import {
   getVueLibTestAliases,
 } from "./alias";
 
+/** only transform mjs and cjs */
+function dynamicBabelPlugin(): RollupPlugin {
+  return {
+    name: "dynamic-babel-plugin",
+    renderChunk(...args) {
+      const { renderChunk: r } = getBabelOutputPlugin({
+        configFile: BABEL_CFG_PATH,
+      });
+      const injectFormatList = ["mjs", "cjs"];
+      if (
+        typeof r === "function" &&
+        injectFormatList.some((format) => args[1].fileName.includes(format))
+      ) {
+        return r.apply(this, args);
+      }
+
+      return args[0];
+    },
+  };
+}
 /** rollup 公共插件配置 */
-export function getPublicRollupPlugins(): RollupPlugin[] {
+export function getPublicRollupInputPlugins(): RollupPlugin[] {
   return [
     nodeResolve({
       resolveOnly: ["lodash-es"],
     }),
+    dynamicBabelPlugin(),
   ];
 }
 /** 动态插入vue-demi运行时 */
@@ -69,11 +92,12 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
     },
     rollupOptions: {
       external: MODULES_EXTERNAL_LIBS,
+      plugins: [...getPublicRollupInputPlugins()],
       output: {
         globals: {
           ...MODULES_GLOBALS_CONFIG,
         },
-        plugins: [dynamicInjectVueDemiPlugin(), ...getPublicRollupPlugins()],
+        plugins: [dynamicInjectVueDemiPlugin()],
       },
     },
   };

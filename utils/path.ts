@@ -4,6 +4,7 @@ import { LibSuffix, getComponentLibName, VersionType } from "../meta/constants";
 export const ROOT_DIR = resolve(__dirname, "..");
 export const LOG_FILE_PATH = resolve(ROOT_DIR, "./build.log");
 export const TEST_LOG_FILE_PATH = resolve(ROOT_DIR, "./test.log");
+export const BABEL_CFG_PATH = resolve(ROOT_DIR, ".babelrc");
 
 // <----------------- source code path ----------------->
 export const PACKAGES_ROOT = resolve(ROOT_DIR, "packages");
