@@ -6,3 +6,4 @@
 - [] unit test
 - [] vitepress powered doc
 - [] unplugin
+- [√] es5 compatible
