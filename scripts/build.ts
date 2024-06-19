@@ -1,10 +1,17 @@
 import { removeSync } from "fs-extra";
 import fg from "fast-glob";
 import { execSync, exec } from "node:child_process";
-import { buildLog, cleanLogFile, OUTPUT_ROOT, ROOT_DIR } from "../utils";
+import {
+  buildLog,
+  cleanLogFile,
+  getComponentLibOutputDir,
+  OUTPUT_ROOT,
+  ROOT_DIR,
+} from "../utils";
 import { setPackageMeta } from "./packageMeta";
 import { setPackageTypes } from "./types";
 import { isValidVersionType } from "~/meta/constants";
+import { resolve } from "node:path";
 
 /** get dev & build container path */
 async function getContainerEntries() {
@@ -16,6 +23,14 @@ async function getContainerEntries() {
   return pathList.map((pathStr) => pathStr.replace(matchPattern, ""));
 }
 
+async function buildTypes() {
+  // generate utils types
+  buildLog.start("Generate utils types...");
+  const utilsOutputPath = resolve(getComponentLibOutputDir("utils"), "types");
+  execSync(
+    `pnpm exec tsc --project tsconfig.export.json --declarationDir ${utilsOutputPath}`
+  );
+}
 async function main() {
   try {
     // remove log file
@@ -30,17 +45,19 @@ async function main() {
     const containers = await getContainerEntries();
     const buildTasks: Promise<void>[] = [];
     containers.forEach((containerDir) => {
-      buildTasks.push(new Promise<void>((resolve, reject)=>{
-        exec(`pnpm -F ./containers/${containerDir} build`, (err)=>{
-          if (err) {
-            buildLog.error(err);
-            reject(err);
-          } else {
-            buildLog.success(`${containerDir} build`);
-            resolve();
-          }
-        });
-      }))
+      buildTasks.push(
+        new Promise<void>((resolve, reject) => {
+          exec(`pnpm -F ./containers/${containerDir} build`, (err) => {
+            if (err) {
+              buildLog.error(err);
+              reject(err);
+            } else {
+              buildLog.success(`${containerDir} build`);
+              resolve();
+            }
+          });
+        })
+      );
     });
     await Promise.all(buildTasks);
     buildLog.info("Copy component lib meta...");
@@ -54,7 +71,7 @@ async function main() {
     // build other libs
     buildLog.start("Rollup other packages...");
     execSync(`pnpm run build:rollup`);
-
+    await buildTypes();
     buildLog.success("All build tasks done");
     // buildLog.start("add additional build products...");
     // # no works for now

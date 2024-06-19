@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "declarationDir": "test-types",
+    "declaration": true, // 生成声明文件
+    "emitDeclarationOnly": true, // 仅生成声明文件
+    "allowImportingTsExtensions": true
+  },
+  // 包含的源文件
+  "include": ["packages/utils/**/*.ts"],
+  "exclude": [
+    "dist",
+    "**/__tests__/*",
+    "**/*.test.*",
+    "**/test-dts/*",
+    "**/*.test-d.ts"
+  ]
+}
