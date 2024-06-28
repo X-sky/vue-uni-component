@@ -2,17 +2,21 @@
   "name": "edited by scripts",
   "version": "",
   "description": "",
-  "keywords": ["vue", "components", "vue-demi"],
+  "keywords": [
+    "vue",
+    "components",
+    "vue-demi"
+  ],
   "author": "",
   "license": "MIT",
   "main": "index.cjs",
   "jsdelivr": "index.iife.js",
   "unpkg": "index.iife.js",
   "module": "index.mjs",
-  "types": "index.d.ts",
+  "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
+      "types": "./types/index.d.ts",
       "require": "./index.cjs",
       "import": "./index.mjs"
     },

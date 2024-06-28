@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "packages/utils"
+  },
+  // 包含的源文件
+  "include": ["packages/utils/**/*.ts"],
+  "exclude": [
+    "dist",
+    "**/__tests__/*",
+    "**/*.test.*",
+    "**/test-dts/*",
+    "**/*.test-d.ts"
+  ]
+}

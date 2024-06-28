@@ -3,7 +3,6 @@ import fg from "fast-glob";
 import { execSync, exec } from "node:child_process";
 import { buildLog, cleanLogFile, OUTPUT_ROOT, ROOT_DIR } from "../utils";
 import { setPackageMeta } from "./packageMeta";
-import { setPackageTypes } from "./types";
 import { isValidVersionType } from "~/meta/constants";
 import { buildTypes } from "./buildTypes";
 
@@ -51,7 +50,6 @@ async function main() {
     containers.forEach((dir) => {
       if (isValidVersionType(dir)) {
         setPackageMeta(dir);
-        setPackageTypes(dir);
       }
     });
     // build other libs
