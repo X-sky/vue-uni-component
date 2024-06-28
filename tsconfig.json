@@ -1,14 +1,10 @@
 {
   "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "rootDirs": ["."],
-    "baseUrl": ".",
-    "paths": {
-      "@vue-uni-ui/*": ["./packages/*"],
-      "~/*": ["./*"]
-    }
+  // dev with vue3
+  "vueCompilerOptions": {
+    "target": 3
   },
+  // 包含的源文件
   "include": [
     "packages/**/*.vue",
     "packages/**/*.ts",
@@ -16,5 +12,6 @@
     "scripts",
     "utils",
     "types"
-  ]
+  ],
+  "exclude": ["containers/v2"]
 }

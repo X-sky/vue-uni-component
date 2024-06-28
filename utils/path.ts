@@ -1,6 +1,8 @@
 import { resolve } from "node:path";
 import { LibSuffix, getComponentLibName, VersionType } from "../meta/constants";
 
+/** resolve as /D:/xxx */
+const __dirname = new URL(".", import.meta.url).pathname.slice(1);
 export const ROOT_DIR = resolve(__dirname, "..");
 export const LOG_FILE_PATH = resolve(ROOT_DIR, "./build.log");
 export const TEST_LOG_FILE_PATH = resolve(ROOT_DIR, "./test.log");

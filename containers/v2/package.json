@@ -13,15 +13,17 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "vite": "^4.4.7",
     "@vue/composition-api": "^1.7.1",
     "@vue/test-utils": "1",
     "unplugin-vue2-script-setup": "^0.11.4",
+    "vite": "^4.4.7",
     "vite-plugin-vue2": "^2.0.3",
     "vue-template-compiler": "2.6.14"
   },
   "dependencies": {
     "@vue-uni-ui/components-test": "workspace:^",
-    "vue": "2.6.14"
+    "@vue/runtime-dom": "^3.4.30",
+    "vue": "2.6.14",
+    "vue-demi": "^0.14.5"
   }
 }

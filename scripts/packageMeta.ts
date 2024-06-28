@@ -1,5 +1,5 @@
 import { resolve, basename } from "node:path";
-import { copyFile, readJsonSync, writeJSON } from "fs-extra";
+import fs from "fs-extra";
 import fg from "fast-glob";
 import { VersionType, getComponentLibName } from "../meta/constants";
 import {
@@ -7,16 +7,19 @@ import {
   ROOT_DIR,
   UI_COMMON_META,
   fixDepsVer,
-  COMPONENTS_ROOT
+  COMPONENTS_ROOT,
 } from "../utils";
 
-import rootPackageJson from "../package.json";
+const rootPackageJson = fs.readJsonSync(resolve(ROOT_DIR, "package.json"));
 
-
-const componentPackageJson = readJsonSync(resolve(COMPONENTS_ROOT, "package.json"));
+const componentPackageJson = fs.readJsonSync(
+  resolve(COMPONENTS_ROOT, "package.json")
+);
 function setPackageJson(version: VersionType) {
   const packageName = getComponentLibName(version);
-  const basePackageInfo = readJsonSync(resolve(UI_COMMON_META, "base-package.json"));
+  const basePackageInfo = fs.readJsonSync(
+    resolve(UI_COMMON_META, "base-package.json")
+  );
   // override ui package.json props
   basePackageInfo.name = packageName;
   basePackageInfo.version = rootPackageJson.version;
@@ -33,7 +36,10 @@ function setPackageJson(version: VersionType) {
     )
   );
   // override devDependencies if has any
-  if (componentPackageJson.devDependencies && Object.getOwnPropertyNames(componentPackageJson.devDependencies).length) {
+  if (
+    componentPackageJson.devDependencies &&
+    Object.getOwnPropertyNames(componentPackageJson.devDependencies).length
+  ) {
     basePackageInfo.devDependencies = Object.assign(
       {},
       componentPackageJson.devDependencies
@@ -44,7 +50,7 @@ function setPackageJson(version: VersionType) {
     getComponentLibOutputDir(version),
     "package.json"
   );
-  writeJSON(targetPackageJsonPath, basePackageInfo, {
+  fs.writeJSON(targetPackageJsonPath, basePackageInfo, {
     spaces: 2,
   });
 }
@@ -59,7 +65,7 @@ async function copyFiles(version: VersionType) {
   sourceFiles.forEach((sourceFile) => {
     const fileName = basename(sourceFile);
     const targetFilePath = resolve(targetLibDir, fileName);
-    copyFile(sourceFile, targetFilePath);
+    fs.copyFile(sourceFile, targetFilePath);
   });
 }
 

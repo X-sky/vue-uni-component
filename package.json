@@ -10,7 +10,7 @@
     "dev:3": "pnpm -F ./containers/v3 dev",
     "dev:cdn": "pnpm -F ./cdn-playground dev",
     "build": "esno ./scripts/build.ts",
-    "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c",
+    "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup --config=rollup.config.ts --configPlugin=rollup-plugin-esbuild",
     "ui:create": "esno ./scripts/components/create.ts",
     "ui:remove": "esno ./scripts/components/remove.ts",
     "release": "bumpp",
@@ -19,7 +19,14 @@
     "test:27": "pnpm -F ./containers/v2.7 test",
     "test:3": "pnpm -F ./containers/v3 test"
   },
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "vue3",
+    "frontend",
+    "component-library",
+    "components",
+    "vue-components"
+  ],
   "author": "ttse",
   "license": "MIT",
   "devDependencies": {
@@ -44,13 +51,16 @@
     "lodash-es": "^4.17.21",
     "prompts": "^2.4.2",
     "rimraf": "^5.0.1",
-    "rollup": "^4.13.0",
+    "rollup": "^4.18.0",
     "rollup-plugin-esbuild": "^6.1.1",
     "sass": "^1.65.1",
-    "typescript": "^5.1.6",
+    "typescript": "^5.5.2",
     "vite": "^5.2.10",
     "vitest": "^1.1.0",
-    "vue": "3.2.47"
+    "vue": "3.2.47",
+    "vue-tsc": "^2.0.22",
+    "vue2": "npm:vue@2.6.14",
+    "vue27": "npm:vue@2.7.14"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.4",

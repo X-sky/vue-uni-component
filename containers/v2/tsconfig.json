@@ -2,5 +2,24 @@
   "extends": "../../tsconfig.base.json",
   "vueCompilerOptions": {
     "target": 2
-  }
+  },
+  "compilerOptions": {
+    "rootDir": "../..",
+    "types": ["node", "vite/client", "unplugin-vue2-script-setup/types"]
+  },
+  "include": [
+    "./**/*.vue",
+    "./**/*.ts",
+    "../../packages/components-test/**/*.vue",
+    "../../packages/components/**/*.vue",
+    "../../packages/components/**/*.ts",
+    "../../packages/utils/**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "**/__tests__/*",
+    "**/*.test.*",
+    "**/test-dts/*",
+    "**/*.test-d.ts"
+  ]
 }

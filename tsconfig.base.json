@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "rootDir": ".",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "es2017",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": true,
@@ -10,11 +12,17 @@
     "declaration": true,
     "declarationDir": "./types",
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "jsx": "preserve",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "noUnusedLocals": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "paths": {
+      "@vue-uni-ui/*": ["./packages/*"],
+      "~/*": ["./*"]
+    },
+    "types": ["node", "vite/client"]
   },
-  "exclude": ["node_modules", "**/*.md", "**/dist"]
+  "exclude": ["**/node_modules", "**/*.md", "**/dist"]
 }

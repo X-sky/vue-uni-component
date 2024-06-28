@@ -1,17 +1,11 @@
 import { removeSync } from "fs-extra";
 import fg from "fast-glob";
 import { execSync, exec } from "node:child_process";
-import {
-  buildLog,
-  cleanLogFile,
-  getComponentLibOutputDir,
-  OUTPUT_ROOT,
-  ROOT_DIR,
-} from "../utils";
+import { buildLog, cleanLogFile, OUTPUT_ROOT, ROOT_DIR } from "../utils";
 import { setPackageMeta } from "./packageMeta";
 import { setPackageTypes } from "./types";
 import { isValidVersionType } from "~/meta/constants";
-import { resolve } from "node:path";
+import { buildTypes } from "./buildTypes";
 
 /** get dev & build container path */
 async function getContainerEntries() {
@@ -23,14 +17,6 @@ async function getContainerEntries() {
   return pathList.map((pathStr) => pathStr.replace(matchPattern, ""));
 }
 
-async function buildTypes() {
-  // generate utils types
-  buildLog.start("Generate utils types...");
-  const utilsOutputPath = resolve(getComponentLibOutputDir("utils"), "types");
-  execSync(
-    `pnpm exec tsc --project tsconfig.export.json --declarationDir ${utilsOutputPath}`
-  );
-}
 async function main() {
   try {
     // remove log file

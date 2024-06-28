@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import UniIcon from "../../UniIcon";
 import { useUniTheme } from "@vue-uni-ui/utils";
-import { CSSProperties, computed } from "vue-demi";
+import { StyleValue, computed } from "vue-demi";
 useUniTheme();
 
 const props = withDefaults(
@@ -54,8 +54,8 @@ const clickMask = () => {
   }
 };
 
-const customStyle = computed<CSSProperties>(() => {
-  const ret: CSSProperties = {
+const customStyle = computed<StyleValue>(() => {
+  const ret: StyleValue = {
     width: "50%",
     height: "50%",
   };
@@ -103,6 +103,7 @@ $headerHeight: 60px;
   filter: blur(4px);
   opacity: 0.3;
 }
+
 .uu-dialog-container {
   position: fixed;
   top: 50%;
@@ -117,11 +118,13 @@ $headerHeight: 60px;
   border-radius: 8px;
   overflow: hidden;
 }
+
 .uu-dialog-content {
   padding-top: $headerHeight;
   height: calc(100% - $headerHeight);
   overflow: auto;
 }
+
 .uu-dialog-header {
   position: absolute;
   top: 0;
@@ -134,12 +137,14 @@ $headerHeight: 60px;
   align-items: center;
   justify-content: center;
 }
+
 .uu-dialog-header-title {
   flex: 1;
   font-size: 16px;
   color: var(--uu-color-font-primary);
   font-weight: 500;
 }
+
 .uu-dialog-close-icon {
   position: absolute;
   top: 15px;

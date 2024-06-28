@@ -1,4 +1,4 @@
-import { copyFile, ensureDirSync, readJsonSync, writeJSON } from "fs-extra";
+import fs from "fs-extra";
 import { dirname, resolve, extname } from "node:path";
 import type { RollupOptions, Plugin } from "rollup";
 import type { Options as ESBuildOptions } from "rollup-plugin-esbuild";
@@ -7,7 +7,7 @@ import {
   UTILS_IIFE_NAME,
   IIFE_GLOBALS_CONFIG,
   IIFE_EXTERNAL_LIBS,
-} from "~/meta/constants";
+} from "./meta/constants";
 import {
   buildLog,
   dynamicInjectVueDemiPlugin,
@@ -15,7 +15,7 @@ import {
   getPublicRollupInputPlugins,
   ROOT_DIR,
   UTILS_ENTRY,
-} from "~/utils";
+} from "./utils";
 
 const outDir = getComponentLibOutputDir("utils");
 
@@ -33,23 +33,23 @@ function copyMetaPlugin(): Plugin {
     buildEnd() {
       buildLog.info("Copy utils meta...");
       const metaFileNames = ["package.json", "README.md"];
-      ensureDirSync(outDir);
+      fs.ensureDirSync(outDir);
       metaFileNames.forEach((fileName) => {
         const sourceFilePath = resolve(dirname(UTILS_ENTRY), fileName);
         const targetFilePath = resolve(outDir, fileName);
         if (extname(fileName).includes("json")) {
           // update dependencies with root
-          const jsonContent = readJsonSync(sourceFilePath);
-          const rootJson = readJsonSync(resolve(ROOT_DIR, "package.json"));
+          const jsonContent = fs.readJsonSync(sourceFilePath);
+          const rootJson = fs.readJsonSync(resolve(ROOT_DIR, "package.json"));
           jsonContent.dependencies = {
             ...(jsonContent.dependencies || {}),
             ...(rootJson.dependencies || {}),
           };
-          writeJSON(targetFilePath, jsonContent, {
+          fs.writeJSON(targetFilePath, jsonContent, {
             spaces: 2,
           });
         } else {
-          copyFile(sourceFilePath, targetFilePath);
+          fs.copyFile(sourceFilePath, targetFilePath);
         }
       });
     },

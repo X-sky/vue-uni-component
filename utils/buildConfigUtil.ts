@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import fs from "fs-extra";
 import type { LibraryFormats, BuildOptions, UserConfig } from "vite";
 import { mergeConfig } from "vite";
 import { configDefaults } from "vitest/config";
@@ -56,7 +56,7 @@ export function getPublicRollupInputPlugins(): RollupPlugin[] {
 }
 /** 动态插入vue-demi运行时 */
 export function dynamicInjectVueDemiPlugin(): RollupPlugin {
-  const vueDemiRuntimeCode = readFileSync(VUE_DEMI_IIFE, "utf-8");
+  const vueDemiRuntimeCode = fs.readFileSync(VUE_DEMI_IIFE, "utf-8");
   const injectFormatList: LibraryFormats[] = ["iife", "umd"];
   return {
     name: "inject-vue-demi-runtime",
@@ -104,8 +104,9 @@ export function getBasicBuildOptions(version: VersionType): BuildOptions {
 }
 
 export function getBasicContainerViteConfig(version: VersionType): UserConfig {
+  const containerRoot = getContainerDir(version);
   return {
-    root: getContainerDir(version),
+    root: containerRoot,
     server: {
       port: 2143,
     },
@@ -115,6 +116,7 @@ export function getBasicContainerViteConfig(version: VersionType): UserConfig {
         ...getVueLibAliases(version),
       },
     },
+    plugins: [],
     build: {
       ...getBasicBuildOptions(version),
     },

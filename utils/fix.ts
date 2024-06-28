@@ -1,4 +1,8 @@
-import rootPackageJson from "../package.json";
+import fs from "fs-extra";
+import { resolve } from "node:path";
+import { ROOT_DIR } from "./path";
+
+const rootPackageJson = fs.readJsonSync(resolve(ROOT_DIR, "package.json"));
 
 export function fixDepsVer(deps: Record<string, string>) {
   const fixedDeps = {

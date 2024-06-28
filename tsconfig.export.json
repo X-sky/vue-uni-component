@@ -1,6 +1,7 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": "packages/utils",
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "declarationDir": "test-types",
