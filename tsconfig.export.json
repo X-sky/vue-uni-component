@@ -1,12 +1,12 @@
 {
   "extends": "./tsconfig.base.json",
+
   "compilerOptions": {
-    "rootDir": "packages/utils",
+    "rootDir": "packages/components",
     "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true
   },
-  // 包含的源文件
-  "include": ["packages/utils/**/*.ts"],
+  "include": ["packages/components"],
   "exclude": [
     "dist",
     "**/__tests__/*",

@@ -9,10 +9,10 @@
   "jsdelivr": "./index.iife.min.js",
   "unpkg": "./index.iife.min.js",
   "module": "./index.mjs",
-  "types": "./index.d.ts",
+  "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
+      "types": "./types/index.d.ts",
       "require": "./index.cjs",
       "import": "./index.mjs"
     },

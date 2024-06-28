@@ -1,12 +1,12 @@
 import { execSync } from "node:child_process";
-import { resolve } from "node:path";
+import path, { relative, resolve } from "node:path";
 import fs from "fs-extra";
 import {
   VersionType,
   getComponentLibName,
   type LibSuffix,
 } from "~/meta/constants";
-import { buildLog, getComponentLibOutputDir } from "~/utils";
+import { ROOT_DIR, buildLog, getComponentLibOutputDir } from "~/utils";
 import { genGlobalTypes } from "~/meta/ui-common/globalTypesTpl";
 
 const getTypesOutDir = (libName: LibSuffix) =>
@@ -24,17 +24,42 @@ function buildUtilsTypes() {
   );
 }
 
+function getPosixPathRelativeToRoot(p: string) {
+  return relative(ROOT_DIR, p).replaceAll(path.sep, "/");
+}
 /**
  * build @vue-uni-ui/v3 types
  */
 function buildCmpTypesV3() {
-  // const baseConfigJson = fs.readJsonSync(resolve(ROOT_DIR, "package.json"));
+  if (process.cwd() !== ROOT_DIR) {
+    // need to be run under root directory
+    return;
+  }
   // generate cmp types for vue3
   if (fs.existsSync(utilsTypesOutDir)) {
+    const tmpJsonPath = resolve(ROOT_DIR, "tsconfig.export.json");
+    const tmpJsonFile = fs.readJsonSync(tmpJsonPath);
+    tmpJsonFile.compilerOptions.paths = {
+      // get relative utils output pat6h
+      "@vue-uni-ui/utils": [
+        `./${getPosixPathRelativeToRoot(getComponentLibOutputDir("utils"))}`,
+      ],
+      "~/*": ["./*"],
+    };
+    tmpJsonFile.compilerOptions.declarationDir = `./${getPosixPathRelativeToRoot(
+      cmpTypesOutDirV3
+    )}`;
+    tmpJsonFile.vueCompilerOptions = {
+      target: 3,
+    };
+
+    const tsConfigJsonName = "tsconfig.v3.json";
+    const tsConfigJsonPath = resolve(ROOT_DIR, tsConfigJsonName);
+
+    fs.writeJSONSync(tsConfigJsonPath, tmpJsonFile);
     // build cmp types only after utils types built
-    execSync(
-      `pnpm exec vue-tsc --project tsconfig.v3.json --declarationDir ${cmpTypesOutDirV3}`
-    );
+    execSync(`pnpm exec vue-tsc --project ${tsConfigJsonName}`);
+    fs.remove(tsConfigJsonPath);
   }
 }
 
