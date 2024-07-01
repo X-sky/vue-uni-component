@@ -6,8 +6,15 @@ import {
   getComponentLibName,
   type LibSuffix,
 } from "~/meta/constants";
-import { ROOT_DIR, buildLog, getComponentLibOutputDir } from "~/utils";
+import {
+  COMPONENTS_ROOT,
+  ROOT_DIR,
+  buildLog,
+  getComponentLibOutputDir,
+} from "~/utils";
 import { genGlobalTypes } from "~/meta/ui-common/globalTypesTpl";
+import FastGlob from "fast-glob";
+import { CMP_NAME_PREFIX } from "./components/constants";
 
 const getTypesOutDir = (libName: LibSuffix) =>
   resolve(getComponentLibOutputDir(libName), "types");
@@ -66,13 +73,17 @@ function buildCmpTypesV3() {
 /**
  * set components.d.ts for volar
  */
-export function setPackageTypes(version: VersionType) {
-  // TODO: dynamic generate types
+async function setPackageVolarTypes(version: VersionType) {
   const packageName = getComponentLibName(version);
-  const globalTypesContent = genGlobalTypes(
-    version,
-    `UniTemplate: typeof import('${packageName}')['UniTemplate']`
-  );
+  const existedComponentDirNames = await FastGlob("*", {
+    cwd: COMPONENTS_ROOT,
+    onlyDirectories: true,
+  });
+  const tmpStr = existedComponentDirNames
+    .filter((name) => name.startsWith(CMP_NAME_PREFIX))
+    .map((name) => `${name}: typeof import('${packageName}')['${name}']`)
+    .join("\n");
+  const globalTypesContent = genGlobalTypes(version, tmpStr);
   const outLibDir = getComponentLibOutputDir(version);
   const targetFilePath = resolve(outLibDir, "components.d.ts");
   fs.writeFile(targetFilePath, globalTypesContent, "utf-8");
@@ -83,4 +94,6 @@ export async function buildTypes() {
   buildLog.start("Generate types...");
   buildUtilsTypes();
   buildCmpTypesV3();
+  // temporarily only vue3
+  setPackageVolarTypes("v3");
 }

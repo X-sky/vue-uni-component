@@ -12,6 +12,7 @@ import {
 import { existsSync, mkdirSync, readFile, writeFile } from "fs-extra";
 import { getRelativeTestName } from "./common";
 import { rewriteRelatedFiles } from "./rewrite";
+import { CMP_NAME_PREFIX } from "./constants";
 
 const toUpperCamelCase = (str: string): string => {
   if (!str) return "";
@@ -30,8 +31,8 @@ async function getComponentName() {
     message: "Component Name",
     format: toUpperCamelCase,
     validate(val: string) {
-      if (!val.startsWith("Uni")) {
-        return `Component Name should start with "Uni"`;
+      if (!val.startsWith(CMP_NAME_PREFIX)) {
+        return `Component Name should start with ${CMP_NAME_PREFIX}`;
       }
       const upperCamelCaseName = toUpperCamelCase(val);
       if (upperCamelCaseName !== val) {
